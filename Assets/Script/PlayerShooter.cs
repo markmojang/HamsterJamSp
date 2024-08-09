@@ -19,7 +19,7 @@ public class PlayerShooter : MonoBehaviour
     {
         if ( firect < fireRate) 
         {
-            firect += Time.time; 
+            firect += Time.deltaTime; 
         }
         else{
             Shoot();
@@ -38,7 +38,7 @@ public class PlayerShooter : MonoBehaviour
 
         // สร้างกระสุน
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Destroy(bullet, 3f); 
+        Destroy(bullet, 2f); 
 
         // กำหนดทิศทางและความเร็วให้กับกระสุน
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
