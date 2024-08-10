@@ -13,6 +13,7 @@ public class Tank : Enemy
     public float spreadAngle = 30f; // Total spread angle in degrees
 
     private float nextFireTime = 0f;
+    private bool isAiming = true; // To ensure proper aiming before shooting
 
     protected override void Start()
     {
@@ -27,8 +28,8 @@ public class Tank : Enemy
     {
         MoveTowardsPlayer();
         LookAtPlayer();
-        
-        if (Time.time >= nextFireTime)
+
+        if (isAiming && Time.time >= nextFireTime)
         {
             FireShotgun();
             nextFireTime = Time.time + fireRate;
@@ -63,6 +64,16 @@ public class Tank : Enemy
         float angle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+
+        // Check if the Tank is facing the player
+        if (Mathf.Abs(Mathf.DeltaAngle(currentAngle, targetAngle)) < 5f)
+        {
+            isAiming = true; // Ready to fire
+        }
+        else
+        {
+            isAiming = false; // Not ready to fire
+        }
     }
 
     private void FireShotgun()
