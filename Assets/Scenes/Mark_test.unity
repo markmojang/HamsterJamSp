@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   Damage: 100
-  moveSpeed: 3
+  moveSpeed: 10
 --- !u!50 &1113387900
 Rigidbody2D:
   serializedVersion: 4
@@ -400,6 +400,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 901066052834134931, guid: cc36e3a654de7664cad9adaae08e9cb8, type: 3}
   bulletSpeed: 20
   fireRate: 0.5
+  bulletlifespan: 3
 --- !u!95 &1113387904
 Animator:
   serializedVersion: 5
@@ -696,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9575f81bb9b1e3542a4457e2d9538b43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnRadius: 10
+  spawnRadius: 20
   player: {fileID: 1113387902}
   tankPrefab: {fileID: 4931739945177832824, guid: 70f23f085fede5b4593635a11208a7f0, type: 3}
   rangerPrefab: {fileID: 8851488315524640325, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
