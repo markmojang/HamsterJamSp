@@ -4,6 +4,13 @@ public class Sniper : Enemy
 {
     public float rotationSpeed = 5f;
     public float attackRange = 10f;
+    public GameObject bulletPrefab; // The enemy bullet prefab
+    public Transform firePoint; // The fire point from where the bullet will be shot
+    public float bulletSpeed = 20f; // Speed of the bullet
+    public float fireRate = 2f; // Time between shots in seconds
+
+    private float nextFireTime = 0f;
+
     protected override void Start()
     {
         health = 50f;
@@ -12,10 +19,17 @@ public class Sniper : Enemy
 
         base.Start();
     }
+
     private void Update()
     {
         MaintainDistanceFromPlayer();
-        lookatplayer();
+        LookAtPlayer();
+        
+        if (Time.time >= nextFireTime)
+        {
+            Fire();
+            nextFireTime = Time.time + fireRate;
+        }
     }
 
     private void MaintainDistanceFromPlayer()
@@ -33,7 +47,9 @@ public class Sniper : Enemy
             transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         }
     }
-    private void lookatplayer(){
+
+    private void LookAtPlayer()
+    {
         Vector2 direction = new Vector2(
             player.position.x - transform.position.x,
             player.position.y - transform.position.y
@@ -46,5 +62,19 @@ public class Sniper : Enemy
         float angle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+    }
+
+    private void Fire()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        EnemyBullet DMG = bullet.GetComponent<EnemyBullet>();
+        DMG.damage = damage;
+
+        if (rb != null)
+        {
+            Vector3 direction = (player.position - firePoint.position).normalized;
+            rb.velocity = direction * bulletSpeed;
+        }
     }
 }
