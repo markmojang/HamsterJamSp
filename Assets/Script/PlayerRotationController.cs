@@ -13,7 +13,7 @@ public class LookAtCursor : MonoBehaviour
         // ล็อคเคอร์เซอร์ให้อยู่ในหน้าจอเกม
         Cursor.lockState = CursorLockMode.Confined;
     }
-    void Update()
+    void FixedUpdate()
     {
         Vector3 mousePosition = Input.mousePosition;
 
