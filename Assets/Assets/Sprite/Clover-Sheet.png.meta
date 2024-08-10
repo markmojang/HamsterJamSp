@@ -116,7 +116,7 @@ TextureImporter:
         x: 0
         y: 0
         width: 32
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e9854de72f4a0694684520df4612e5c3
-      internalID: 1419656222
+      spriteID: cc260baba45c23a4bb04168aeef26ebb
+      internalID: 1759234831
       vertices: []
       indices: 
       edges: []
@@ -137,7 +137,7 @@ TextureImporter:
         x: 32
         y: 0
         width: 32
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9a38ddfe9f8be71469aa2e332f078678
-      internalID: -140371824
+      spriteID: bc6588ef88789ab4ba562d70dac58982
+      internalID: -440403875
       vertices: []
       indices: 
       edges: []
@@ -158,7 +158,7 @@ TextureImporter:
         x: 64
         y: 0
         width: 32
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f4bf6e3236d5fe249946d96d4faa060a
-      internalID: -1590641711
+      spriteID: 6e6c9b7f4ee5b36408a0e0642a93931c
+      internalID: -183008264
       vertices: []
       indices: 
       edges: []
@@ -179,7 +179,7 @@ TextureImporter:
         x: 96
         y: 0
         width: 32
-        height: 32
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c0900c2a9dd3d9a43b16849f9a6d0171
-      internalID: 980678307
+      spriteID: 9ea750fb70880944ab549e3cb4d738e1
+      internalID: -1339552997
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Clover-Sheet_0: 1419656222
-      Clover-Sheet_1: -140371824
-      Clover-Sheet_2: -1590641711
-      Clover-Sheet_3: 980678307
+      Clover-Sheet_0: 1759234831
+      Clover-Sheet_1: -440403875
+      Clover-Sheet_2: -183008264
+      Clover-Sheet_3: -1339552997
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
