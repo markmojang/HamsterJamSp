@@ -57,7 +57,6 @@ public class WaveManager : MonoBehaviour
         {
             enemy.health *= multiplier;
             enemy.damage *= multiplier;
-            enemy.speed *= multiplier;
         }
     }
 }
