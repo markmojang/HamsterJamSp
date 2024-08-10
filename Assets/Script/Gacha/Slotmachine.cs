@@ -22,9 +22,12 @@ public class Slotmachine : MonoBehaviour
 
     void Start()
     {
+        
         spinSpeed = spinSpeedfx;
         for (int i = 0; i < slotImages.Length; i++)
         {
+            Color imageColor = slotImages[i].color;
+            imageColor.a = 1f;
             initialPosition.Add(slotImages[i].rectTransform.anchoredPosition); // Use Add() to add elements to the list
         }
 
@@ -41,6 +44,12 @@ public class Slotmachine : MonoBehaviour
     {
         if (!isSpinning)
         {
+            for (int i = 0; i < slotImages.Length; i++)
+            {
+                Color imageColor = slotImages[i].color;
+                imageColor.a = 1f; // Set alpha to 1 for fully opaque
+                slotImages[i].color = imageColor;
+            }
             // Play background music
             backgroundMusicSource.Play();
 
