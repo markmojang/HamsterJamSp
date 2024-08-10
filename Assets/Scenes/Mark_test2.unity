@@ -897,7 +897,6 @@ MonoBehaviour:
   - {fileID: 487483833}
   - {fileID: 1866381638}
   - {fileID: 561673998}
-  - {fileID: 561673998}
   slotSprites:
   - {fileID: 21300000, guid: 1897878698113f940bde30754fde29c7, type: 3}
   - {fileID: 21300000, guid: 3e92d3b2ba1f7e14aabbe4a128cb03eb, type: 3}
