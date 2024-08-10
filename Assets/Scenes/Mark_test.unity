@@ -633,6 +633,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FollowSpeed: 5
   target: {fileID: 1113387902}
+  zoomSpeed: 15
+  minZoom: 5
+  maxZoom: 20
+  zoomSmoothTime: 0.1
 --- !u!1 &1926053129
 GameObject:
   m_ObjectHideFlags: 0
