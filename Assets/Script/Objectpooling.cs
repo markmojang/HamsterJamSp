@@ -11,6 +11,7 @@ public class ObjectPool : MonoBehaviour
 	public int countToPool;
 	[SerializeField]
 	private string tag;
+	
 	void Awake() {
 		if(instance == null){
 			instance = new List<ObjectPool>();
