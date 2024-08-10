@@ -17,6 +17,9 @@ public class Slotmachine : MonoBehaviour
     [SerializeField] private AudioClip spinClip; // The sound effect that plays during each spin
     [SerializeField] private AudioClip backgroundClip; // The background sound that plays during spinning
 
+    private AudioSource backgroundMusicSource;
+    private AudioSource spinSoundSource;
+
     void Start()
     {
         spinSpeed = spinSpeedfx;
@@ -24,17 +27,22 @@ public class Slotmachine : MonoBehaviour
         {
             initialPosition.Add(slotImages[i].rectTransform.anchoredPosition); // Use Add() to add elements to the list
         }
+
+        // Initialize AudioSources
+        backgroundMusicSource = gameObject.AddComponent<AudioSource>();
+        spinSoundSource = gameObject.AddComponent<AudioSource>();
+
+        // Set up background music source
+        backgroundMusicSource.clip = backgroundClip;
+        backgroundMusicSource.loop = false; // Enable looping
     }
 
     public void StartSpinning()
     {
         if (!isSpinning)
         {
-            // Play background sound at the start of spinning
-            if (backgroundClip)
-            {
-                AudioSource.PlayClipAtPoint(backgroundClip, Vector3.zero);
-            }
+            // Play background music
+            backgroundMusicSource.Play();
 
             StartCoroutine(SpinSlots());
         }
@@ -85,7 +93,7 @@ public class Slotmachine : MonoBehaviour
                     // Play the spin sound effect each time a sprite changes
                     if (spinClip)
                     {
-                        AudioSource.PlayClipAtPoint(spinClip, Vector3.zero);
+                        spinSoundSource.PlayOneShot(spinClip);
                     }
                 }
 
@@ -111,5 +119,8 @@ public class Slotmachine : MonoBehaviour
 
         isSpinning = false;
         spinSpeed = spinSpeedfx;
+
+        // Stop the background music when spinning stops
+        backgroundMusicSource.Stop();
     }
 }
