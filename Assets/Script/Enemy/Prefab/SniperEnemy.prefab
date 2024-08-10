@@ -157,7 +157,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
+  m_Size: {x: 0.7, y: 0.7}
   m_EdgeRadius: 0
 --- !u!114 &4111415319052100800
 MonoBehaviour:
@@ -174,3 +174,6 @@ MonoBehaviour:
   health: 50
   damage: 50
   speed: 1.5
+  bulletPrefab: {fileID: 2880794570971432102, guid: 60df67b7c653fa945982e49cf3f99b01, type: 3}
+  attackRange: 10
+  fireCooldown: 2

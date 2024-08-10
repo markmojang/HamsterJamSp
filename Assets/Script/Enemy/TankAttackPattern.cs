@@ -20,7 +20,8 @@ public class TankAttackPattern : IAttackPattern
             Vector3 direction = rotation * enemy.transform.up;
 
             // Instantiate and shoot the bullet
-            EnemyBullet bullet = Instantiate(enemy.bulletPrefab, enemy.transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+            GameObject bulletObject = ObjectFactory.InstantiatePrefab(enemy.bulletPrefab, enemy.transform.position, Quaternion.identity);
+            EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
             bullet.SetDirection(direction);
         }
     }

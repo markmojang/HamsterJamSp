@@ -11,8 +11,9 @@ public class RangerAttackPattern : IAttackPattern
 
     public void ExecuteAttack(Enemy enemy)
     {
-        // Instantiate and shoot the bullet
-        EnemyBullet bullet = Instantiate(enemy.bulletPrefab, enemy.transform.position, Quaternion.identity).GetComponent<EnemyBullet>();
+        // Use the ObjectFactory to instantiate the bullet
+        GameObject bulletObject = ObjectFactory.InstantiatePrefab(enemy.bulletPrefab, enemy.transform.position, Quaternion.identity);
+        EnemyBullet bullet = bulletObject.GetComponent<EnemyBullet>();
         bullet.SetDirection(enemy.transform.up);
     }
 }

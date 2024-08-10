@@ -7,9 +7,11 @@ public abstract class Enemy : MonoBehaviour
     public float speed;
     protected IAttackPattern attackPattern;
     protected Transform player;
-
+    public GameObject bulletPrefab;
+    
     protected virtual void Start()
     {
+        player = GameObject.FindWithTag("Player").transform;
         // Initialize with default stats or override in subclasses
     }
 
