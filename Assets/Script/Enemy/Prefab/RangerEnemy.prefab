@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6302613618247951749}
   - component: {fileID: 6323987031757773583}
   - component: {fileID: 4475855143395588441}
-  - component: {fileID: 6058638165753945390}
+  - component: {fileID: 2451198363158116127}
   m_Layer: 0
   m_Name: RangerEnemy
   m_TagString: Enemy
@@ -159,7 +159,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8, y: 0.8}
   m_EdgeRadius: 0
---- !u!114 &6058638165753945390
+--- !u!114 &2451198363158116127
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,6 +171,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da95c8bda90ff74b929663d7b3a6eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  damage: 20
-  speed: 2
+  health: 0
+  damage: 0
+  speed: 0

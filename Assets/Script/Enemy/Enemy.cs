@@ -6,6 +6,7 @@ public abstract class Enemy : MonoBehaviour
     public float damage;
     public float speed;
     protected IAttackPattern attackPattern;
+    protected Transform player;
 
     protected virtual void Start()
     {
