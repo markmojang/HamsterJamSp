@@ -11,13 +11,12 @@ public class CameraController : MonoBehaviour
 
     // Update is called once per frame
     void Start(){
-        y = transform.position.y;
         z = transform.position.z;
     }
 
     void FixedUpdate()
     {
-        Vector3 newPos = new Vector3(target.position.x, y, z);
+        Vector3 newPos = new Vector3(target.position.x, target.position.y, z);
         transform.position = Vector3.Slerp(transform.position,newPos,FollowSpeed*Time.deltaTime);
     }
 }
