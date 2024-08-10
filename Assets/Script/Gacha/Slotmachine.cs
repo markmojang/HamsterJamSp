@@ -7,8 +7,9 @@ public class Slotmachine : MonoBehaviour
     public Image[] slotImages; // Array to hold the images representing the slots
     public Sprite[] slotSprites; // Array to hold the possible sprites for the slots
     [SerializeField] private float spinSpeedfx;
-    public float spinSpeed; // Speed of the slot spinning
     public float spinDuration = 2f; // How long the slots should spin for
+    
+    private float spinSpeed; // Speed of the slot spinning
     private bool isSpinning = false;
     public List<Vector2> initialPosition = new List<Vector2>(); // Use a List instead of an array
 
