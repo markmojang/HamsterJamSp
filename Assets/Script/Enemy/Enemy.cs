@@ -29,9 +29,6 @@ public abstract class Enemy : MonoBehaviour
 
     protected void Die()
     {
-        // Notify WaveManager
-        FindObjectOfType<WaveManager>().EnemyKilled();
-
         // Handle enemy death, e.g., play animation, remove from game
         Destroy(gameObject);
     }
