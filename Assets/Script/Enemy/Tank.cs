@@ -78,6 +78,15 @@ public class Tank : Enemy
 
     private void FireShotgun()
     {
+    // Fire the first set of bullets
+    FireShotgunSet();
+
+    // Optional: Add a short delay between the two sets
+    Invoke("FireShotgunSet", 0.2f); // Adjust the delay as needed
+    }
+
+    private void FireShotgunSet()
+    {
         float angleStep = spreadAngle / (bulletCount - 1);
         float startAngle = -spreadAngle / 2;
 
