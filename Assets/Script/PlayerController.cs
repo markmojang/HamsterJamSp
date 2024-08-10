@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed = 3f;
+    public float health = 100;
+    public float Damage = 100;
+    public float moveSpeed = 3f;
     private Rigidbody2D rb;
 
     void Start()

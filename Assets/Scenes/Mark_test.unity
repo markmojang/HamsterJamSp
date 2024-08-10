@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 895328142}
   - component: {fileID: 895328141}
-  - component: {fileID: 895328140}
   m_Layer: 0
   m_Name: Cursor
   m_TagString: Untagged
@@ -141,19 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &895328140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895328139}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ab2b74fec19a0149b87c142aea119c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  distanceFromCenter: 4.5
 --- !u!212 &895328141
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -256,6 +242,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3126dd34502c3734ba3e0692da9e382f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  Damage: 100
   moveSpeed: 3
 --- !u!50 &1113387900
 Rigidbody2D:
@@ -399,7 +387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41314902fa70c7d43ad545c111e3a579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceFromCenter: 5
   rotationSpeed: 10
+  arrow: {fileID: 895328139}
 --- !u!61 &1113387906
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class PlayerShooter : MonoBehaviour
 
     void Start() 
     {
-    mainCamera = Camera.main; 
+        mainCamera = Camera.main; 
     }
     
     void Update()
@@ -29,18 +29,14 @@ public class PlayerShooter : MonoBehaviour
 
     void Shoot()
     {
-        // หาตำแหน่งของเมาส์ในโลก 3 มิติ
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f; // ปรับให้ z เป็น 0 เพื่อให้กระสุนอยู่ในระนาบเดียวกับตัวละคร
+        mousePosition.z = 0f;
 
-        // หาเวกเตอร์ทิศทางจากตัวละครไปยังเมาส์
         Vector3 direction = (mousePosition - transform.position).normalized;
 
-        // สร้างกระสุน
         GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         Destroy(bullet, 2f); 
 
-        // กำหนดทิศทางและความเร็วให้กับกระสุน
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
     }

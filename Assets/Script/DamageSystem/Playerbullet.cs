@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Playerbullet : MonoBehaviour
 {
-    [SerializeField] private float damage;
+    private float damage;
+    void Start(){
+        damage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Damage;
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         Enemy enemy = col.GetComponent<Enemy>(); // หา component Enemy จากวัตถุที่ชน
@@ -13,7 +16,6 @@ public class Playerbullet : MonoBehaviour
             // ศัตรูได้รับความเสียหาย
             enemy.TakeDamage(damage); // สมมติว่าคุณมีตัวแปร damage ในสคริปต์นี้เพื่อเก็บค่าความเสียหายที่ต้องการทำ
             Destroy(gameObject);
-            
         }
     }
 }

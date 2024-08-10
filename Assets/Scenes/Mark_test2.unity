@@ -293,8 +293,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000015259, y: 111.1}
-  m_SizeDelta: {x: 246.1949, y: 52.1998}
+  m_AnchoredPosition: {x: -0.00011949, y: 108.825}
+  m_SizeDelta: {x: 343.8, y: 78.6891}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &108496435
 MonoBehaviour:
@@ -318,8 +318,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Let's Gambling
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: cdf63c412b0460a41bc9426222c46926, type: 2}
+  m_sharedMaterial: {fileID: -7849094787557354811, guid: cdf63c412b0460a41bc9426222c46926, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
