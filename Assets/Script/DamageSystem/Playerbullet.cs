@@ -15,7 +15,7 @@ public class Playerbullet : MonoBehaviour
         {
             // ศัตรูได้รับความเสียหาย
             enemy.TakeDamage(damage); // สมมติว่าคุณมีตัวแปร damage ในสคริปต์นี้เพื่อเก็บค่าความเสียหายที่ต้องการทำ
-            Destroy(gameObject);
+            ObjectPool.Instance.ReturnObjectToPool(gameObject);
         }
     }
 }

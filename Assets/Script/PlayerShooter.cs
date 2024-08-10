@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     public GameObject bulletPrefab;
+    
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
     private float firect = 0f;
@@ -34,10 +35,11 @@ public class PlayerShooter : MonoBehaviour
 
         Vector3 direction = (mousePosition - transform.position).normalized;
 
-        GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        Destroy(bullet, 2f); 
+        GameObject bullet = ObjectPool.Instance.GetObjectFromPool();
 
+        bullet.transform.position = transform.position; 
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
+
     }
 }
