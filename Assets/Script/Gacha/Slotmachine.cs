@@ -7,9 +7,10 @@ public class Slotmachine : MonoBehaviour
     public Image[] slotImages; // Array to hold the images representing the slots
     public Sprite[] slotSprites; // Array to hold the possible sprites for the slots
     [SerializeField] private float spinSpeedfx;
+    [SerializeField] private float delaystop = 0.5f;
     public float spinDuration = 2f; // How long the slots should spin for
     
-    private float spinSpeed; // Speed of the slot spinning
+    [SerializeField]private float spinSpeed; // Speed of the slot spinning
     private bool isSpinning = false;
     public List<Vector2> initialPosition = new List<Vector2>(); // Use a List instead of an array
 
@@ -34,20 +35,37 @@ public class Slotmachine : MonoBehaviour
     private IEnumerator SpinSlots()
     {
         isSpinning = true;
-
+        int index = 0;
         float elapsed = 0f;
         float spriteChangeInterval = 0.1f; // Initial interval for sprite changes
         float nextSpriteChangeTime = 0f;
 
-        while (elapsed < spinDuration)
+        while (elapsed < spinDuration + delaystop*2)
         {
             elapsed += Time.unscaledDeltaTime;
             spinSpeed -= Time.unscaledDeltaTime; // Decelerate the spin speed
 
             // Change sprites only at intervals, with decreasing frequency
+            if(elapsed >= spinDuration+delaystop*2 && index == 2){
+                int finalIndex = Random.Range(0, slotSprites.Length);
+                slotImages[index].sprite = slotSprites[finalIndex];
+                slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
+            }
+            else if(elapsed >= spinDuration+delaystop && index == 1){
+                int finalIndex = Random.Range(0, slotSprites.Length);
+                slotImages[index].sprite = slotSprites[finalIndex];
+                slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
+                index++;
+            }
+            else if(elapsed >= spinDuration && index == 0){
+                int finalIndex = Random.Range(0, slotSprites.Length);
+                slotImages[index].sprite = slotSprites[finalIndex];
+                slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
+                index++;
+            }
             if (Time.unscaledTime > nextSpriteChangeTime)
             {
-                for (int i = 0; i < slotImages.Length; i++)
+                for (int i = 0+index; i < slotImages.Length; i++)
                 {
                     int randomIndex = Random.Range(0, slotSprites.Length);
                     slotImages[i].sprite = slotSprites[randomIndex];
@@ -55,10 +73,10 @@ public class Slotmachine : MonoBehaviour
 
                 // Increase the interval for the next sprite change
                 spriteChangeInterval += 0.05f; // Adjust this value to control the deceleration rate
-                nextSpriteChangeTime = Time.time + spriteChangeInterval;
+                nextSpriteChangeTime = Time.unscaledTime + spriteChangeInterval;
             }
 
-            for (int i = 0; i < slotImages.Length; i++)
+            for (int i = 0+index; i < slotImages.Length; i++)
             {
                 // Move the slot image downward
                 slotImages[i].rectTransform.anchoredPosition -= new Vector2(0, spinSpeed);
@@ -73,7 +91,6 @@ public class Slotmachine : MonoBehaviour
             yield return null;
         }
 
-        // Stop the slots and reset them to their final positions
         for (int i = 0; i < slotImages.Length; i++)
         {
             int finalIndex = Random.Range(0, slotSprites.Length);
@@ -81,6 +98,7 @@ public class Slotmachine : MonoBehaviour
 
             // Reset the position to the initial position
             slotImages[i].rectTransform.anchoredPosition = initialPosition[i];
+            yield return new WaitForSecondsRealtime(0.5f);
         }
 
         isSpinning = false;
