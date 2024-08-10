@@ -269,6 +269,9 @@ MonoBehaviour:
   pauseMenuUI: {fileID: 604904384}
   leftPanel: {fileID: 1609108979}
   rightPanel: {fileID: 640325043}
+  animationDuration: 0.425
+  pauseSound: {fileID: 8300000, guid: 74c59bbfbd8b9bd4092ea6b9941141fd, type: 3}
+  resumeSound: {fileID: 8300000, guid: ec6e1c60f61c3b745b1d508652e1c286, type: 3}
 --- !u!4 &665275942
 Transform:
   m_ObjectHideFlags: 0
