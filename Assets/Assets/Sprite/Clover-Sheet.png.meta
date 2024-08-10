@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cc260baba45c23a4bb04168aeef26ebb
-      internalID: 1759234831
+      spriteID: 020f209266a85c94b8399af9a212d559
+      internalID: 1736501867
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bc6588ef88789ab4ba562d70dac58982
-      internalID: -440403875
+      spriteID: 5133caf9bb221534886ba83229c17d4c
+      internalID: -693958864
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6e6c9b7f4ee5b36408a0e0642a93931c
-      internalID: -183008264
+      spriteID: 1b0ad93011b92964da6955b6be8df841
+      internalID: -1579761930
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ea750fb70880944ab549e3cb4d738e1
-      internalID: -1339552997
+      spriteID: fce8a34e4320dbf43bb9fe23798622ee
+      internalID: -1245458161
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Clover-Sheet_0: 1759234831
-      Clover-Sheet_1: -440403875
-      Clover-Sheet_2: -183008264
-      Clover-Sheet_3: -1339552997
+      Clover-Sheet_0: 1736501867
+      Clover-Sheet_1: -693958864
+      Clover-Sheet_2: -1579761930
+      Clover-Sheet_3: -1245458161
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
