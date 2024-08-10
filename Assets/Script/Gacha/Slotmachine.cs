@@ -40,24 +40,25 @@ public class Slotmachine : MonoBehaviour
         float spriteChangeInterval = 0.1f; // Initial interval for sprite changes
         float nextSpriteChangeTime = 0f;
 
-        while (elapsed < spinDuration + delaystop*2)
+        while (elapsed <= spinDuration)
         {
             elapsed += Time.unscaledDeltaTime;
             spinSpeed -= Time.unscaledDeltaTime; // Decelerate the spin speed
 
             // Change sprites only at intervals, with decreasing frequency
-            if(elapsed >= spinDuration+delaystop*2 && index == 2){
+            if(elapsed >= spinDuration && index == 2){
                 int finalIndex = Random.Range(0, slotSprites.Length);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
+                
             }
-            else if(elapsed >= spinDuration+delaystop && index == 1){
+            else if(elapsed >= spinDuration-delaystop && index == 1){
                 int finalIndex = Random.Range(0, slotSprites.Length);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
                 index++;
             }
-            else if(elapsed >= spinDuration && index == 0){
+            else if(elapsed >= spinDuration-delaystop*2 && index == 0){
                 int finalIndex = Random.Range(0, slotSprites.Length);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
@@ -89,16 +90,6 @@ public class Slotmachine : MonoBehaviour
             }
 
             yield return null;
-        }
-
-        for (int i = 0; i < slotImages.Length; i++)
-        {
-            int finalIndex = Random.Range(0, slotSprites.Length);
-            slotImages[i].sprite = slotSprites[finalIndex];
-
-            // Reset the position to the initial position
-            slotImages[i].rectTransform.anchoredPosition = initialPosition[i];
-            yield return new WaitForSecondsRealtime(0.5f);
         }
 
         isSpinning = false;

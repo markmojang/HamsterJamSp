@@ -697,7 +697,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 1897878698113f940bde30754fde29c7, type: 3}
   - {fileID: 392273796, guid: 7db80242874ca354fa4fd1f305687ade, type: 3}
   spinSpeedfx: 5
-  spinDuration: 3
+  delaystop: 0.5
+  spinDuration: 5
+  spinSpeed: 0
   initialPosition: []
 --- !u!4 &656919200
 Transform:
