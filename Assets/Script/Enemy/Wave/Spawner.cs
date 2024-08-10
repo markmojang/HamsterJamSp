@@ -9,11 +9,14 @@ public class Spawner : MonoBehaviour
     public GameObject rangerPrefab;
     public GameObject sniperPrefab;
 
+    private void Start(){
+    }
     public void SpawnEnemy()
     {
+        
         Vector2 spawnPosition = (Vector2)player.position + (Random.insideUnitCircle.normalized * spawnRadius);
         GameObject enemyPrefab = ChooseEnemyPrefab();  // Implement this method to randomly choose an enemy type
-        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity).GetComponent<Enemy>();
     }
 
     private GameObject ChooseEnemyPrefab()

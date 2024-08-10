@@ -24,6 +24,8 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+
+
     private IEnumerator StartWave()
     {
         enemiesAlive = enemiesPerWave * currentWave;
@@ -43,32 +45,12 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         currentWave++;
-        IncreaseDifficulty();
         StartCoroutine(StartWave());
     }
 
-    public void IncreaseDifficulty()
+    public int GetCurrentwave()
     {
-        float multiplier = 1f + (currentWave * 0.1f);
-        Debug.Log("Increasing difficulty: " + multiplier);
-
-        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
-        Debug.Log("Found " + enemyObjects.Length + " enemies");
-
-        foreach (GameObject obj in enemyObjects)
-        {
-            Enemy enemy = obj.GetComponent<Enemy>();
-            if (enemy != null)
-            {
-                enemy.health *= multiplier;
-                enemy.damage *= multiplier;
-                Debug.Log("Updated enemy: " + obj.name + " | Health: " + enemy.health + " | Damage: " + enemy.damage);
-            }
-            else
-            {
-                Debug.Log("No Enemy component found on: " + obj.name);
-            }
-        }
+        return currentWave;
     }
 
 }

@@ -31,4 +31,13 @@ public abstract class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
     
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
+    }
 }

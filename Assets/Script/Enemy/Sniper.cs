@@ -10,25 +10,21 @@ public class Sniper : Enemy
     public float fireRate = 2f; // Time between shots in seconds
 
     private float nextFireTime = 0f;
+    private WaveManager waveManager;
+    private int currentWave;
 
     protected override void Start()
     {
-        health = 50f;
-        damage = 50f;
+        waveManager = FindObjectOfType<WaveManager>();
+        currentWave = waveManager.currentWave;
+        float multiplier = 1f + (currentWave*0.1f);
+        health = 50f * multiplier;
+        damage = 50f * multiplier;
         speed = 1.5f;
 
         base.Start();
     }
 
-    public void SetHealth(float newHealth)
-    {
-        health = newHealth;
-    }
-
-    public void SetDamage(float newDamage)
-    {
-        damage = newDamage;
-    }
 
     private void Update()
     {

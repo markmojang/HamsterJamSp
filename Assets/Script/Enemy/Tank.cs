@@ -14,24 +14,19 @@ public class Tank : Enemy
 
     private float nextFireTime = 0f;
     private bool isAiming = true; // To ensure proper aiming before shooting
+    private WaveManager waveManager;
+    private int currentWave;
 
     protected override void Start()
     {
-        health = 200f;
-        damage = 10f;
+        waveManager = FindObjectOfType<WaveManager>();
+        currentWave = waveManager.currentWave;
+        float multiplier = 1f + (currentWave*0.1f);
+        health = 200f * multiplier;
+        damage = 10f * multiplier;
         speed = 5.0f;
 
         base.Start();
-    }
-
-    public void SetHealth(float newHealth)
-    {
-        health = newHealth;
-    }
-
-    public void SetDamage(float newDamage)
-    {
-        damage = newDamage;
     }
 
     private void Update()

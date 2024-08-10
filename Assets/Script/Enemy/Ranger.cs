@@ -12,25 +12,21 @@ public class Ranger : Enemy
     public float fireRate = 0.2f; // Time between shots in seconds
 
     private float nextFireTime = 0f;
+    private WaveManager waveManager;
+    private int currentWave;
 
     protected override void Start()
     {
-        health = 100f;
-        damage = 20f;
+        waveManager = FindObjectOfType<WaveManager>();
+        currentWave = waveManager.currentWave;
+        float multiplier = 1f + (currentWave*0.1f);
+        health = 100f * multiplier;
+        damage = 20f * multiplier;
         speed = 2f;
 
         base.Start();
     }
 
-    public void SetHealth(float newHealth)
-    {
-        health = newHealth;
-    }
-
-    public void SetDamage(float newDamage)
-    {
-        damage = newDamage;
-    }
 
     private void Update()
     {
