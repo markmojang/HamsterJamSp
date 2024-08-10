@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6323987031757773583}
   - component: {fileID: 4475855143395588441}
   - component: {fileID: 6058638165753945390}
+  - component: {fileID: 1387013521265486463}
   m_Layer: 0
   m_Name: RangerEnemy
   m_TagString: Enemy
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -417240638, guid: 7db80242874ca354fa4fd1f305687ade, type: 3}
+  m_Sprite: {fileID: 1419656222, guid: 1e4ee3d2b9abd8246828aff5130b5b5e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -174,3 +175,28 @@ MonoBehaviour:
   health: 100
   damage: 20
   speed: 2
+  rotationSpeed: 5
+  minDistance: 3
+  maxDistance: 6
+  attackRange: 10
+--- !u!95 &1387013521265486463
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8851488315524640325}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 165ef7c58c93b0d479f10eb86484577c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
