@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class WaveManager : MonoBehaviour
 {
@@ -10,25 +11,26 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         spawner = GetComponent<Spawner>();
-        StartWave();
+        StartCoroutine(StartWave());
     }
 
     private void Update()
     {
         // Check if all enemies are killed
-        if (enemiesAlive == 0)
+        if (enemiesAlive <= 0)
         {
             StartNextWave();
+            Debug.Log("Next Wave");
         }
     }
 
-    public void StartWave()
+    private IEnumerator StartWave()
     {
         enemiesAlive = enemiesPerWave * currentWave;
-
         for (int i = 0; i < enemiesAlive; i++)
         {
             spawner.SpawnEnemy();
+            yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
         }
     }
 
@@ -41,7 +43,7 @@ public class WaveManager : MonoBehaviour
     {
         currentWave++;
         IncreaseDifficulty();
-        StartWave();
+        StartCoroutine(StartWave());
     }
 
     public void IncreaseDifficulty()
