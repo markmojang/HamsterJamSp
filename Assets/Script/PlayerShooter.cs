@@ -10,7 +10,7 @@ public class PlayerShooter : MonoBehaviour
     public float fireRate = 0.5f;
     private float firect = 0f;
     private Camera mainCamera;
-
+    [SerializeField] private float bulletlifespan;
     void Start() 
     {
         mainCamera = Camera.main; 
@@ -41,5 +41,12 @@ public class PlayerShooter : MonoBehaviour
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.velocity = direction * bulletSpeed;
 
+        StartCoroutine(vanishbullet(bullet));
+        
+    }
+
+    IEnumerator vanishbullet(GameObject objects){
+        yield return new WaitForSeconds(bulletlifespan);
+        ObjectPool.Instance.ReturnObjectToPool(objects);
     }
 }
