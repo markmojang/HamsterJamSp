@@ -110,7 +110,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Main spacecraft-Sheet_0
+      name: Spade-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -124,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7c217359b8d167441830535f91696353
-      internalID: 392273796
+      spriteID: 9e6315ec118482b43a6ffef46d7156b3
+      internalID: -1539413827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Main spacecraft-Sheet_1
+      name: Spade-Sheet_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 172f98c01ca17494f9e4632836068c70
-      internalID: -447445036
+      spriteID: 946c0b7995fa00849aca95d9982e434c
+      internalID: -1122219048
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Main spacecraft-Sheet_2
+      name: Spade-Sheet_2
       rect:
         serializedVersion: 2
         x: 64
@@ -166,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 83678ef8c0e25234488427f671f37896
-      internalID: 1568723543
+      spriteID: 7e5c2b44914f1ff498109f5cf4a92ed1
+      internalID: 479751000
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Main spacecraft-Sheet_3
+      name: Spade-Sheet_3
       rect:
         serializedVersion: 2
         x: 96
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64d7a3e6364eaf24f96f7999cdd68b61
-      internalID: -417240638
+      spriteID: 6fadea48e2889974e821db0957511755
+      internalID: -444013709
       vertices: []
       indices: 
       edges: []
@@ -204,10 +204,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Main spacecraft-Sheet_0: 392273796
-      Main spacecraft-Sheet_1: -447445036
-      Main spacecraft-Sheet_2: 1568723543
-      Main spacecraft-Sheet_3: -417240638
+      Spade-Sheet_0: -1539413827
+      Spade-Sheet_1: -1122219048
+      Spade-Sheet_2: 479751000
+      Spade-Sheet_3: -444013709
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

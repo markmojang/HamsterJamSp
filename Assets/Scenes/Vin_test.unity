@@ -202,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 355904412}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -221,6 +221,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceFromCenter: 3
+--- !u!1001 &380246991
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8851488315524640325, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_Name
+      value: RangerEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.4108043
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.078970045
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.016368132
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9097940187993659030, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5efb29dbf2aec8c49a776ab78a085245, type: 3}
 --- !u!1 &1113387898
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,6 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3126dd34502c3734ba3e0692da9e382f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  Damage: 100
   moveSpeed: 3
 --- !u!50 &1113387900
 Rigidbody2D:
@@ -398,7 +477,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41314902fa70c7d43ad545c111e3a579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceFromCenter: 5
   rotationSpeed: 5
+  arrow: {fileID: 0}
 --- !u!1 &1632763571
 GameObject:
   m_ObjectHideFlags: 0
