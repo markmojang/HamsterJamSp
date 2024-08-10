@@ -20,6 +20,16 @@ public class Sniper : Enemy
         base.Start();
     }
 
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
+    }
+
     private void Update()
     {
         MaintainDistanceFromPlayer();

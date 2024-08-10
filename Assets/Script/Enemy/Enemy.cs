@@ -13,10 +13,6 @@ public abstract class Enemy : MonoBehaviour
         // Initialize with default stats or override in subclasses
     }
 
-    public virtual void Attack()
-    {
-    }
-
     public void TakeDamage(float amount)
     {
         health -= amount;

@@ -19,9 +19,19 @@ public class Tank : Enemy
     {
         health = 200f;
         damage = 10f;
-        speed = 1.0f;
+        speed = 5.0f;
 
         base.Start();
+    }
+
+    public void SetHealth(float newHealth)
+    {
+        health = newHealth;
+    }
+
+    public void SetDamage(float newDamage)
+    {
+        damage = newDamage;
     }
 
     private void Update()

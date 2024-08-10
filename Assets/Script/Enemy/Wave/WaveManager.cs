@@ -50,13 +50,25 @@ public class WaveManager : MonoBehaviour
     public void IncreaseDifficulty()
     {
         float multiplier = 1f + (currentWave * 0.1f);
+        Debug.Log("Increasing difficulty: " + multiplier);
 
-        // Adjust enemy stats based on the wave
-        Enemy[] enemies = FindObjectsOfType<Enemy>();
-        foreach (Enemy enemy in enemies)
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        Debug.Log("Found " + enemyObjects.Length + " enemies");
+
+        foreach (GameObject obj in enemyObjects)
         {
-            enemy.health *= multiplier;
-            enemy.damage *= multiplier;
+            Enemy enemy = obj.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.health *= multiplier;
+                enemy.damage *= multiplier;
+                Debug.Log("Updated enemy: " + obj.name + " | Health: " + enemy.health + " | Damage: " + enemy.damage);
+            }
+            else
+            {
+                Debug.Log("No Enemy component found on: " + obj.name);
+            }
         }
     }
+
 }

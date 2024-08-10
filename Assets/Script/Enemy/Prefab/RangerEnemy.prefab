@@ -206,7 +206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   damage: 20
-  speed: 2
+  speed: 4
   rotationSpeed: 5
   minDistance: 3
   maxDistance: 6
@@ -214,7 +214,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 901066052834134931, guid: 5404f589d82dbd14cbb240bc2095d545, type: 3}
   firePoint: {fileID: 2942966518394679716}
   bulletSpeed: 20
-  fireRate: 0.3
+  fireRate: 0.5
 --- !u!95 &1387013521265486463
 Animator:
   serializedVersion: 5
