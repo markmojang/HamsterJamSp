@@ -27,11 +27,12 @@ public class WaveManager : MonoBehaviour
     private IEnumerator StartWave()
     {
         enemiesAlive = enemiesPerWave * currentWave;
-        for (int i = 0; i < enemiesAlive; i++)
+        for (int i = 0; i < (enemiesPerWave * currentWave); i++)
         {
             spawner.SpawnEnemy();
             yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
         }
+        
     }
 
     public void EnemyKilled()

@@ -41,11 +41,11 @@ public class Slotmachine : MonoBehaviour
 
         while (elapsed < spinDuration)
         {
-            elapsed += Time.deltaTime;
-            spinSpeed -= Time.deltaTime; // Decelerate the spin speed
+            elapsed += Time.unscaledDeltaTime;
+            spinSpeed -= Time.unscaledDeltaTime; // Decelerate the spin speed
 
             // Change sprites only at intervals, with decreasing frequency
-            if (Time.time > nextSpriteChangeTime)
+            if (Time.unscaledTime > nextSpriteChangeTime)
             {
                 for (int i = 0; i < slotImages.Length; i++)
                 {

@@ -34,4 +34,5 @@ public abstract class Enemy : MonoBehaviour
         // Handle enemy death, e.g., play animation, remove from game
         Destroy(gameObject);
     }
+    
 }
