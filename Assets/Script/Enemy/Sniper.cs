@@ -16,7 +16,7 @@ public class Sniper : Enemy
     protected override void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
-        currentWave = waveManager.currentWave;
+        currentWave = waveManager.currentWave - 1;
         float multiplier = 1f + (currentWave*0.1f);
         health = 50f * multiplier;
         damage = 50f * multiplier;
