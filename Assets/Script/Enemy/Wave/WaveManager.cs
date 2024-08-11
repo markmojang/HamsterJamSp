@@ -80,9 +80,6 @@ public class WaveManager : MonoBehaviour
         player.health = player.maxhp;
         player.UpdateHealthBar();
         if(currentWave > 1){
-            PlayerPrefs.SetFloat("PmaxHp", player.maxhp);
-            PlayerPrefs.SetFloat("PDamage", player.Damage);
-            PlayerPrefs.SetFloat("PMoveSpeed", player.moveSpeed);
             PlayerPrefs.SetFloat("PFirerate", playershoot.fireRate);
             PlayerPrefs.SetFloat("PVelocity", playershoot.bulletSpeed);
             PlayerPrefs.Save();

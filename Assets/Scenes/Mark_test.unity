@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 210634475}
   - component: {fileID: 210634476}
   - component: {fileID: 210634477}
+  - component: {fileID: 210634478}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -186,6 +187,18 @@ MonoBehaviour:
   cameraTransform: {fileID: 1632763574}
   emissionRadius: 35
   partipersec: 10
+--- !u!114 &210634478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210634473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ba10707b146b7429126e1e4f8cb66b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &316433262
 GameObject:
   m_ObjectHideFlags: 0

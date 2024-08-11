@@ -27,6 +27,26 @@ public class SetValuePlayerPrefs : MonoBehaviour
             PlayerPrefs.SetFloat("PVelocity", 25f);
             PlayerPrefs.Save();
         }
+        if(!PlayerPrefs.HasKey("PChips")){
+            PlayerPrefs.SetInt("PChips", 0);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeHp")){
+            PlayerPrefs.SetInt("UpgradeHp", 10);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeDmg")){
+            PlayerPrefs.SetInt("UpgradeDmg", 10);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeSpeed")){
+            PlayerPrefs.SetInt("UpgradeSpeed", 10);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeFirerate")){
+            PlayerPrefs.SetInt("UpgradeFirerate", 10);
+            PlayerPrefs.Save();
+        }
     }
 
 
