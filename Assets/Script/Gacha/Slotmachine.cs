@@ -137,7 +137,7 @@ public class Slotmachine : MonoBehaviour
     private void CheckResult(){
         if(slotImages[0].sprite.name == slotImages[1].sprite.name && slotImages[1].sprite.name == slotImages[2].sprite.name){
             Debug.Log("You have win" + slotImages[0].sprite.name);
-
+            
         }
     }
 }
