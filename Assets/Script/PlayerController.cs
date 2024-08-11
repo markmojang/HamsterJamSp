@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float blinkInterval = 0.15f;  // Interval between blinks
     
     [SerializeField] AudioSource HitSoundSource;
+    private WaveManager waveManager;
 
     private SpriteRenderer spriteRenderer;
     private Collider2D playerCollider;
@@ -27,6 +28,7 @@ public class PlayerController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<BoxCollider2D>();
         HitSoundSource = gameObject.GetComponent<AudioSource>();
+        waveManager = FindObjectOfType<WaveManager>();
     }
 
     void Update()
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private void Die()
     {
         Debug.Log("You Die");
+        waveManager.ResetToCheckpoint();
     }
 
     void UpdateHealthBar()
