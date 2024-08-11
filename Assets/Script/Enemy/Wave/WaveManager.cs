@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class WaveManager : MonoBehaviour
 {
     public int currentWave = 1;
-    public int enemiesPerWave = 5;
+    public int enemiesPerWave = 4;
     public int checkpointInterval = 5; // Set the checkpoint interval
     private int checkpointWave = 1;
     private int enemiesAlive = 0;
@@ -61,8 +61,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartWave()
     {
-        enemiesAlive = enemiesPerWave + (currentWave - 1);
-        for (int i = 0; i < enemiesPerWave + (currentWave - 1); i++)
+        enemiesAlive = enemiesPerWave + currentWave;
+        for (int i = 0; i < enemiesPerWave + currentWave; i++)
         {
             spawner.SpawnEnemy();
             yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
