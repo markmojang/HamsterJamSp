@@ -2034,6 +2034,10 @@ PrefabInstance:
       value: SlotMachineController
       objectReference: {fileID: 0}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: spinvalue
+      value: 
+      objectReference: {fileID: 2082980111}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: slotImages.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -2310,8 +2314,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 16777215
+  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -8114,6 +8118,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2082980111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3549610245864520355, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+  m_PrefabInstance: {fileID: 342291306}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2106089257
 GameObject:
   m_ObjectHideFlags: 0

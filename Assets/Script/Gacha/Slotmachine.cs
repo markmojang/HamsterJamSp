@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Slotmachine : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class Slotmachine : MonoBehaviour
     [SerializeField] private float spinSpeed; // Speed of the slot spinning
     private bool isSpinning = false;
     public List<Vector2> initialPosition = new List<Vector2>(); // Use a List instead of an array
-
+    [SerializeField] private TMP_Text spinvalue;
     [SerializeField] private AudioClip spinClip; // The sound effect that plays during each spin
     [SerializeField] private AudioClip backgroundClip; // The background sound that plays during spinning
 
@@ -40,6 +41,10 @@ public class Slotmachine : MonoBehaviour
         // Set up background music source
         backgroundMusicSource.clip = backgroundClip;
         backgroundMusicSource.loop = false; // Enable looping
+    }
+
+    private void Update(){
+        spinvalue.text = "SPIN X" + PlayerPrefs.GetInt("SpinPoint").ToString();
     }
 
     public void StartSpinning()
