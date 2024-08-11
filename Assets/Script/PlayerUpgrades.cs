@@ -35,7 +35,7 @@ public class PlayerUpgrades : MonoBehaviour
     {
         if (currency >= maxHPUpgradeCost)
         {
-            playerController.maxhp += 50;
+            playerController.maxhp += 25;
             playerController.health = playerController.maxhp; // Restore health to new max
             currency -= maxHPUpgradeCost;
             maxHPUpgradeCost += costIncrement; // Increase cost for this specific upgrade

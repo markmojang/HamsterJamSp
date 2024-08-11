@@ -608,6 +608,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6845742440277514241, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_text
+      value: Restore Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845742440277514241, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_margin.z
+      value: 26.70823
+      objectReference: {fileID: 0}
     - target: {fileID: 7062969630291848455, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 69
@@ -1210,7 +1218,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 42f1a820e3b208c41ac633760713deef, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1848,7 +1856,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: eeab422a762eb7a41b758227f0bdd6ac, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.7
   m_Pitch: 1
   Loop: 0
   Mute: 0
