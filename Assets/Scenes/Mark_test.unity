@@ -607,7 +607,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4112420642027449560, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.00016784668
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 4112420642027449560, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -623,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5650224336683779037, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_Camera
@@ -787,6 +787,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8290740928103040443, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_Color.a
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731287967224151809, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 121.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8731287967224151809, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8810195415607570787, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
@@ -2850,7 +2858,7 @@ PrefabInstance:
       objectReference: {fileID: 2082980111}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: spinSpeedfx
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: spinDuration
