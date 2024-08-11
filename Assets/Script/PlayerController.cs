@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro; // Add this namespace
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,13 +14,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] float iFrameDuration = 1.5f; // Duration of invincibility in seconds
     [SerializeField] float blinkInterval = 0.15f;  // Interval between blinks
-    
+
     [SerializeField] AudioSource HitSoundSource;
     private WaveManager waveManager;
 
     private SpriteRenderer spriteRenderer;
     private Collider2D playerCollider;
     private bool isInvincible = false;
+
+    // Add these fields
+    [SerializeField] private TMP_Text hpText;
+    [SerializeField] private TMP_Text damageText;
+    [SerializeField] private TMP_Text speedText;
+    [SerializeField] private TMP_Text fireRateText; // Add this field
+
+    private PlayerShooter playerShooter; // Add this field
 
     void Start()
     {
@@ -29,16 +38,30 @@ public class PlayerController : MonoBehaviour
         playerCollider = GetComponent<BoxCollider2D>();
         HitSoundSource = gameObject.GetComponent<AudioSource>();
         waveManager = FindObjectOfType<WaveManager>();
+
+        // Find the PlayerShooter component on the child GameObject
+        playerShooter = GetComponentInChildren<PlayerShooter>();
+
+        if (playerShooter == null)
+        {
+            Debug.LogError("PlayerShooter component not found on the GameObject.");
+        }
+
+        // Initialize UI texts
+        UpdateStatUI();
     }
 
     void Update()
     {
-        float horizontal = Input.GetAxis("Horizontal"); 
+        float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         Vector2 movement = new Vector2(horizontal, vertical);
 
-        rb.velocity = movement * moveSpeed; 
+        rb.velocity = movement * moveSpeed;
+
+        // Update the UI with the current stats
+        UpdateStatUI();
     }
 
     public void TakeDamage(float amount)
@@ -88,5 +111,29 @@ public class PlayerController : MonoBehaviour
         spriteRenderer.enabled = true;
         playerCollider.enabled = true;
         isInvincible = false;
+    }
+
+    private void UpdateStatUI()
+    {
+        if (hpText != null)
+        {
+            hpText.text = "HP: " + health.ToString("F0") + "/" + maxhp.ToString("F0");
+        }
+        if (damageText != null)
+        {
+            damageText.text = "DMG: " + Damage.ToString("F0");
+        }
+        if (speedText != null)
+        {
+            speedText.text = "SPD: " + moveSpeed.ToString("F0");
+        }
+        if (fireRateText != null && playerShooter != null)
+        {
+            fireRateText.text = "FIR: " + playerShooter.fireRate.ToString("F2");
+        }
+        else
+        {
+            Debug.LogWarning("Fire rate text or PlayerShooter reference is missing.");
+        }
     }
 }
