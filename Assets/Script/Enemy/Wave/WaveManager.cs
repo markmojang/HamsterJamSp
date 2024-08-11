@@ -14,11 +14,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] AudioSource WaveSoundSource;
     private WaveUI waveUI; // Reference to the WaveUI
 
-    private void Awake()
-    {
-        // PlayerPrefs.DeleteAll();
-    }
-
     private void Start()
     {
         WaveSoundSource = gameObject.GetComponent<AudioSource>();
