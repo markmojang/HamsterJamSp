@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float maxhp = 100;
+    public float maxhp = 100;
     public float health;
     public float Damage = 100;
     public float moveSpeed = 3f;
