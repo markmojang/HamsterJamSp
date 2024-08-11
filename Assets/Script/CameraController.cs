@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
@@ -18,6 +16,11 @@ public class CameraController : MonoBehaviour
     private Camera cam;
     private float targetZoom; // Target zoom value
     private float zoomVelocity = 0f; // Reference velocity for SmoothDamp
+
+    public Camera Cam
+    {
+        get { return cam; }
+    }
 
     void Start()
     {
