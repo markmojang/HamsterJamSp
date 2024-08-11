@@ -1012,7 +1012,6 @@ GameObject:
   - component: {fileID: 1113387901}
   - component: {fileID: 1113387900}
   - component: {fileID: 1113387899}
-  - component: {fileID: 1113387903}
   - component: {fileID: 1113387904}
   - component: {fileID: 1113387905}
   - component: {fileID: 1113387906}
@@ -1134,26 +1133,11 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1157490582}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1113387903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1113387898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d0df956baea96f4aa28ef12e3887304, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 901066052834134931, guid: cc36e3a654de7664cad9adaae08e9cb8, type: 3}
-  bulletSpeed: 25
-  fireRate: 0.5
-  bulletlifespan: 3
 --- !u!95 &1113387904
 Animator:
   serializedVersion: 5
@@ -1468,6 +1452,54 @@ RectTransform:
   m_AnchoredPosition: {x: 340.8, y: -191.07}
   m_SizeDelta: {x: 82.3, y: 42.6}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1157490581
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1157490582}
+  - component: {fileID: 1157490583}
+  m_Layer: 0
+  m_Name: Playershootpoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1157490582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157490581}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.438, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1113387902}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1157490583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1157490581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d0df956baea96f4aa28ef12e3887304, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 901066052834134931, guid: cc36e3a654de7664cad9adaae08e9cb8, type: 3}
+  bulletSpeed: 25
+  fireRate: 0.5
+  bulletlifespan: 3
 --- !u!1 &1189102490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1855,6 +1887,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: slotSprites.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: slotImages.Array.data[0]
       value: 
       objectReference: {fileID: 342291312}
@@ -1870,6 +1906,22 @@ PrefabInstance:
       propertyPath: slotImages.Array.data[3]
       value: 
       objectReference: {fileID: 342291307}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: slotSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: 444d63a61ce50b545b717e4e7e46488e, type: 3}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: slotSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: f858a21b645eb914e8168dee64ba1458, type: 3}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: slotSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: d968d5940956c8643b99d34136205b2a, type: 3}
+    - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
+      propertyPath: slotSprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: f2e3a6f69ba7ec248b9fd73f586cc3eb, type: 3}
     - target: {fileID: 9167030471496255037, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: m_RootOrder
       value: 11
