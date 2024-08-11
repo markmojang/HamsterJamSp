@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] float iFrameDuration = 1.5f; // Duration of invincibility in seconds
     [SerializeField] float blinkInterval = 0.15f;  // Interval between blinks
+    
+    [SerializeField] AudioSource HitSoundSource;
 
     private SpriteRenderer spriteRenderer;
     private Collider2D playerCollider;
@@ -24,6 +26,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerCollider = GetComponent<BoxCollider2D>();
+        HitSoundSource = gameObject.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -40,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isInvincible)
         {
+            HitSoundSource.Play();
             health -= amount;
             UpdateHealthBar();
             if (health <= 0)
