@@ -12,8 +12,7 @@ public class WaveManager : MonoBehaviour
     private Spawner spawner;
     private PlayerController player;
     [SerializeField] AudioSource WaveSoundSource;
-
-
+    private WaveUI waveUI; // Reference to the WaveUI
 
     private void Awake()
     {
@@ -25,6 +24,7 @@ public class WaveManager : MonoBehaviour
         WaveSoundSource = gameObject.GetComponent<AudioSource>();
         spawner = GetComponent<Spawner>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
+        waveUI = FindObjectOfType<WaveUI>(); // Find the WaveUI in the scene
 
         // Load the checkpoint wave if it exists
         if (PlayerPrefs.HasKey("CheckpointWave"))
@@ -32,12 +32,15 @@ public class WaveManager : MonoBehaviour
             checkpointWave = PlayerPrefs.GetInt("CheckpointWave");
             currentWave = checkpointWave;
         }
-        else{
-            PlayerPrefs.SetInt("CheckpointWave",1);
+        else
+        {
+            PlayerPrefs.SetInt("CheckpointWave", 1);
             PlayerPrefs.Save();
         }
-        if (!PlayerPrefs.HasKey("SpinPoint")){
-            PlayerPrefs.SetInt("SpinPoint",0);
+
+        if (!PlayerPrefs.HasKey("SpinPoint"))
+        {
+            PlayerPrefs.SetInt("SpinPoint", 0);
             PlayerPrefs.Save();
         }
         
@@ -49,7 +52,7 @@ public class WaveManager : MonoBehaviour
         // Check if all enemies are killed
         if (enemiesAlive <= 0)
         {
-            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint")+5);
+            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint") + 5);
             WaveSoundSource.Play();
             StartNextWave();
             Debug.Log("Next Wave");
@@ -58,8 +61,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartWave()
     {
-        enemiesAlive = enemiesPerWave + (currentWave - 1) ;
-        for (int i = 0; i < (enemiesAlive); i++)
+        enemiesAlive = enemiesPerWave + (currentWave - 1);
+        for (int i = 0; i < enemiesPerWave + (currentWave - 1); i++)
         {
             spawner.SpawnEnemy();
             yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
@@ -75,17 +78,24 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    public void EnemyKilled()
-    {
-        enemiesAlive--;
-    }
-
     private void StartNextWave()
     {
         currentWave++;
         player.health = player.maxhp;
         player.UpdateHealthBar();
+
+        // Trigger the "NEXT WAVE!!" text animation
+        if (waveUI != null)
+        {
+            waveUI.ShowNextWaveText();
+        }
+
         StartCoroutine(StartWave());
+    }
+
+    public void EnemyKilled()
+    {
+        enemiesAlive--;
     }
 
     public int GetCurrentWave()
@@ -97,7 +107,6 @@ public class WaveManager : MonoBehaviour
     {
         return enemiesAlive;
     }
-
 
     // Method to reset the scene and start from the checkpoint
     public void ResetToCheckpoint()

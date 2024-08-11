@@ -1,11 +1,13 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class WaveUI : MonoBehaviour
 {
     public TMP_Text waveText; // Reference to the TextMeshPro Text element for wave
     public TMP_Text enemiesRemainingText; // Reference to the TextMeshPro Text element for remaining enemies
     public TMP_Text zoomText; // Reference to the TextMeshPro Text element for camera zoom
+    public TMP_Text nextWaveText; // Reference to the TextMeshPro Text element for "NEXT WAVE!!"
 
     private WaveManager waveManager; // Reference to the WaveManager
     private CameraController cameraController; // Reference to the CameraController
@@ -15,6 +17,12 @@ public class WaveUI : MonoBehaviour
         // Find the WaveManager and CameraController in the scene
         waveManager = FindObjectOfType<WaveManager>();
         cameraController = FindObjectOfType<CameraController>();
+
+        // Hide the "NEXT WAVE!!" text at the start
+        if (nextWaveText != null)
+        {
+            nextWaveText.alpha = 0f;
+        }
 
         // Update the UI at the start
         UpdateWaveText();
@@ -61,5 +69,42 @@ public class WaveUI : MonoBehaviour
             currentZoom = 5/currentZoom;
             zoomText.text = "ZOOM " + currentZoom.ToString("F1") + "X";
         }
+    }
+
+    // Method to trigger the "NEXT WAVE!!" text animation
+    public void ShowNextWaveText()
+    {
+        if (nextWaveText != null)
+        {
+            StartCoroutine(FadeTextInAndOut(nextWaveText, 0.5f, 0.5f)); // 1 second to fade in and out
+        }
+    }
+
+    // Coroutine to fade the text in and out
+    private IEnumerator FadeTextInAndOut(TMP_Text text, float fadeInTime, float fadeOutTime)
+    {
+        // Fade in
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeInTime)
+        {
+            elapsedTime += Time.deltaTime;
+            text.alpha = Mathf.Clamp01(elapsedTime / fadeInTime);
+            yield return null;
+        }
+
+        // Wait for a short duration before starting to fade out
+        yield return new WaitForSeconds(1f);
+
+        // Fade out
+        elapsedTime = 0f;
+        while (elapsedTime < fadeOutTime)
+        {
+            elapsedTime += Time.deltaTime;
+            text.alpha = Mathf.Clamp01(1f - (elapsedTime / fadeOutTime));
+            yield return null;
+        }
+
+        // Ensure the text is fully invisible after fading out
+        text.alpha = 0f;
     }
 }
