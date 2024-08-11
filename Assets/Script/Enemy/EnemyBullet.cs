@@ -23,7 +23,7 @@ public class EnemyBullet : MonoBehaviour
                 StartCoroutine(cameraShake.Shake(0.3f, 2f)); // Adjust duration and magnitude as needed
             }
 
-            Destroy(gameObject);
+            Destroy(gameObject, 3f);
         }
     }
 }
