@@ -13,7 +13,7 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
-        # PlayerPrefs.DeleteAll();
+        // PlayerPrefs.DeleteAll();
     }
 
     private void Start()
