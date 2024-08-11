@@ -2850,7 +2850,7 @@ PrefabInstance:
       objectReference: {fileID: 2082980111}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: spinSpeedfx
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7936679662556623679, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: spinDuration
