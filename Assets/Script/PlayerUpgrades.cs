@@ -7,6 +7,7 @@ public class PlayerUpgrades : MonoBehaviour
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerShooter playerShooter;
     [SerializeField] private TextMeshProUGUI currencyText;
+    [SerializeField] private TextMeshProUGUI currencyText2;
 
     [SerializeField] private Button maxHPUpgradeButton;
     [SerializeField] private TextMeshProUGUI maxHPUpgradeButtonText;
@@ -110,6 +111,7 @@ public class PlayerUpgrades : MonoBehaviour
     private void UpdateCurrencyDisplay()
     {
         currencyText.text = "Chips: " + currency.ToString();
+        currencyText2.text = "Chips: " + currency.ToString();
     }
 
     private void UpdateButtonLabels()
