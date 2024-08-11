@@ -45,7 +45,6 @@ public class Slotmachine : MonoBehaviour
     }
 
     public void Update(){
-        if()
     }
 
     public void StartSpinning()
