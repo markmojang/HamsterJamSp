@@ -8,7 +8,7 @@ public class SetValuePlayerPrefs : MonoBehaviour
     void Start()
     {
         if(!PlayerPrefs.HasKey("PmaxHp")){
-            PlayerPrefs.SetFloat("PmaxHp", 200f);
+            PlayerPrefs.SetFloat("PmaxHp", 100f);
             PlayerPrefs.Save();
         }
         if(!PlayerPrefs.HasKey("PDamage")){

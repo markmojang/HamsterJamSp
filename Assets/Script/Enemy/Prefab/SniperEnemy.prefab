@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
-  damage: 50
+  damage: 40
   speed: 3
   deathSFX: {fileID: 8300000, guid: c9ad6ee8b25e4194ab8b58017da54e71, type: 3}
   hitSFX: {fileID: 8300000, guid: aa02c40339398994c98428ce8e64a7dc, type: 3}
