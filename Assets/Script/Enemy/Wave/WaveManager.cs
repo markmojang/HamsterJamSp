@@ -16,7 +16,7 @@ public class WaveManager : MonoBehaviour
     private PlayerShooter playershoot;
     private void Start()
     {
-        WaveSoundSource = gameObject.GetComponent<AudioSource>();
+        WaveSoundSource = gameObject.GetComponent<AudioSource>();   
         spawner = GetComponent<Spawner>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
         playershoot = GameObject.FindWithTag("Player").transform.GetChild(0).gameObject.GetComponent<PlayerShooter>();
