@@ -19,10 +19,14 @@ public class Slotmachine : MonoBehaviour
 
     private AudioSource backgroundMusicSource;
     private AudioSource spinSoundSource;
+    private PlayerController player;
+    private PlayerShooter playershoot;
 
     void Start()
     {
         
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        playershoot = FindObjectsOfType<PlayerShooter>();
         spinSpeed = spinSpeedfx;
         for (int i = 0; i < slotImages.Length; i++)
         {
@@ -38,6 +42,10 @@ public class Slotmachine : MonoBehaviour
         // Set up background music source
         backgroundMusicSource.clip = backgroundClip;
         backgroundMusicSource.loop = false; // Enable looping
+    }
+
+    public void Update(){
+        if()
     }
 
     public void StartSpinning()
@@ -136,8 +144,49 @@ public class Slotmachine : MonoBehaviour
 
     private void CheckResult(){
         if(slotImages[0].sprite.name == slotImages[1].sprite.name && slotImages[1].sprite.name == slotImages[2].sprite.name){
-            Debug.Log("You have win" + slotImages[0].sprite.name);
-            
+            switch(slotImages[0].sprite.name){
+                case "Clover":
+                    Debug.Log("Run " + slotImages[0].sprite.name + " Function");
+                    StartCoroutine(Clover());
+                    break;
+                case "Spade":
+                    Debug.Log("Run " + slotImages[0].sprite.name + " Function");
+                    StartCoroutine(Spade());
+                    break;
+                case "Diamond":
+                    Debug.Log("Run " + slotImages[0].sprite.name + " Function");
+                    StartCoroutine(Diamond());
+                    break;
+                case "Heart":
+                    Debug.Log("Run " + slotImages[0].sprite.name + " Function");
+                    StartCoroutine(Heart());
+                    break;
+            }
         }
     }
+
+    private IEnumenator Clover(){
+        playershoot.fireRate /= 2; 
+        playershoot.bulletSpeed *= 2;
+        yield return new WaitForSeconds(4f);
+        playershoot.fireRate *= 2; 
+        playershoot.bulletSpeed /= 2;
+    }
+
+    private IEnumenator Spade(){
+        player.movespeed *= 2;
+        yield return new WaitForSeconds(4f);
+        player.movespeed /= 2;
+    }
+
+    private IEnumenator Diamond(){
+        player.damage *= 2;
+        yield return new WaitForSeconds(4f);
+        player.damage /= 2;
+    }
+
+    private IEnumenator Heart(){
+        player.health = player.maxhp;
+    }
+    
 }
