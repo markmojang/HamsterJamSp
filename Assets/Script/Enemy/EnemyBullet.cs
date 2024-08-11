@@ -20,7 +20,7 @@ public class EnemyBullet : MonoBehaviour
 
             if (cameraShake != null)
             {
-                StartCoroutine(cameraShake.Shake(0.3f, 2f)); // Adjust duration and magnitude as needed
+                StartCoroutine(cameraShake.Shake(0.3f, 1f)); // Adjust duration and magnitude as needed
             }
 
             Destroy(gameObject, 3f);
