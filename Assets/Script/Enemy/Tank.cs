@@ -23,7 +23,7 @@ public class Tank : Enemy
         currentWave = waveManager.currentWave - 1;
         float multiplier = 1f + (currentWave*0.1f);
         health = 200f * multiplier;
-        damage = 10f * multiplier;
+        damage = 20f * multiplier;
         speed = 7f;
 
         base.Start();

@@ -21,7 +21,7 @@ public class Ranger : Enemy
         currentWave = waveManager.currentWave - 1;
         float multiplier = 1f + (currentWave*0.1f);
         health = 100f * multiplier;
-        damage = 20f * multiplier;
+        damage = 30f * multiplier;
         speed = 5f;
 
         base.Start();
