@@ -608,6 +608,14 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 6845742440277514241, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_text
+      value: Restore Heart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6845742440277514241, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_margin.z
+      value: 26.70823
+      objectReference: {fileID: 0}
     - target: {fileID: 7062969630291848455, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 69
