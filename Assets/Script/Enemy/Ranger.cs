@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Ranger : Enemy
 {
-    public float rotationSpeed = 5f;
-    public float surroundingRadius = 20f; // Desired distance from player
-    public float orbitSpeed = 45f; // Speed at which enemies orbit around the player
+    public float rotationSpeed = 10f;
+    public float surroundingRadius = 25f; // Desired distance from player
+    public float orbitSpeed = 1f; // Speed at which enemies orbit around the player
     public float attackRange = 10f;
     public GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullets will be shot
-    public float bulletSpeed = 15f; // Speed of the bullets
+    public float bulletSpeed = 20f; // Speed of the bullets
     public float fireRate = 0.2f; // Time between shots in seconds
 
     private float nextFireTime = 0f;
@@ -56,7 +56,8 @@ public class Ranger : Enemy
         float angleRad = currentAngle * Mathf.Deg2Rad;
 
         // Calculate the target position on the orbit
-        Vector3 targetPosition = player.position + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
+        Vector3 offset = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
+        Vector3 targetPosition = player.position + offset;
 
         // Move towards the target position
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
