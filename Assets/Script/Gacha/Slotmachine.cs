@@ -22,6 +22,9 @@ public class Slotmachine : MonoBehaviour
     private AudioSource spinSoundSource;
     private PlayerController player;
     private PlayerShooter playershoot;
+
+    private string previousSymbol = null;
+
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -43,7 +46,8 @@ public class Slotmachine : MonoBehaviour
         backgroundMusicSource.loop = false; // Enable looping
     }
 
-    private void Update(){
+    private void Update()
+    {
         spinvalue.text = "SPIN X" + PlayerPrefs.GetInt("SpinPoint").ToString();
     }
 
@@ -51,7 +55,7 @@ public class Slotmachine : MonoBehaviour
     {
         if (!isSpinning && PlayerPrefs.GetInt("SpinPoint") > 0)
         {
-            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint")-1);
+            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint") - 1);
             for (int i = 0; i < slotImages.Length; i++)
             {
                 Color imageColor = slotImages[i].color;
@@ -78,23 +82,25 @@ public class Slotmachine : MonoBehaviour
             elapsed += Time.unscaledDeltaTime;
             spinSpeed -= Time.unscaledDeltaTime; // Decelerate the spin speed
 
-            // Change sprites only at intervals, with decreasing frequency
             if (elapsed >= spinDuration && index == 2)
             {
-                int finalIndex = Random.Range(0, slotSprites.Length);
+                string chosenSymbol = ChooseSymbol(index);
+                int finalIndex = GetSpriteIndex(chosenSymbol);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
             }
             else if (elapsed >= spinDuration - delaystop && index == 1)
             {
-                int finalIndex = Random.Range(0, slotSprites.Length);
+                string chosenSymbol = ChooseSymbol(index);
+                int finalIndex = GetSpriteIndex(chosenSymbol);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
                 index++;
             }
             else if (elapsed >= spinDuration - delaystop * 2 && index == 0)
             {
-                int finalIndex = Random.Range(0, slotSprites.Length);
+                string chosenSymbol = ChooseSymbol(index);
+                int finalIndex = GetSpriteIndex(chosenSymbol);
                 slotImages[index].sprite = slotSprites[finalIndex];
                 slotImages[index].rectTransform.anchoredPosition = initialPosition[index];
                 index++;
@@ -104,7 +110,8 @@ public class Slotmachine : MonoBehaviour
             {
                 for (int i = 0 + index; i < slotImages.Length; i++)
                 {
-                    int randomIndex = Random.Range(0, slotSprites.Length);
+                    string chosenSymbol = ChooseSymbol(i);
+                    int randomIndex = GetSpriteIndex(chosenSymbol);
                     slotImages[i].sprite = slotSprites[randomIndex];
 
                     // Play the spin sound effect each time a sprite changes
@@ -138,13 +145,16 @@ public class Slotmachine : MonoBehaviour
         spinSpeed = spinSpeedfx;
 
         // Stop the background music when spinning stops
-        backgroundMusicSource.Stop();   
+        backgroundMusicSource.Stop();
         CheckResult();
     }
 
-    private void CheckResult(){
-        if(slotImages[0].sprite.name == slotImages[1].sprite.name && slotImages[1].sprite.name == slotImages[2].sprite.name){
-            switch(slotImages[0].sprite.name){
+    private void CheckResult()
+    {
+        if (slotImages[0].sprite.name == slotImages[1].sprite.name && slotImages[1].sprite.name == slotImages[2].sprite.name)
+        {
+            switch (slotImages[0].sprite.name)
+            {
                 case "Clover":
                     Debug.Log("Run " + slotImages[0].sprite.name + " Function");
                     StartCoroutine(Clover());
@@ -165,29 +175,79 @@ public class Slotmachine : MonoBehaviour
         }
     }
 
-    private IEnumerator Clover(){
-        playershoot.fireRate /= 2; 
+    private IEnumerator Clover()
+    {
+        playershoot.fireRate /= 2;
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        playershoot.fireRate *= 2; 
+        playershoot.fireRate *= 2;
         playershoot.bulletSpeed /= 2;
     }
 
-    private IEnumerator Spade(){
+    private IEnumerator Spade()
+    {
         player.moveSpeed *= 2;
         yield return new WaitForSeconds(4f);
         player.moveSpeed /= 2;
     }
 
-    private IEnumerator Diamond(){
+    private IEnumerator Diamond()
+    {
         player.Damage *= 2;
         yield return new WaitForSeconds(4f);
         player.Damage /= 2;
     }
 
-    private IEnumerator Heart(){
+    private IEnumerator Heart()
+    {
         player.health = player.maxhp;
         yield return null;
     }
-    
+
+    // Helper function to choose a symbol based on the previous one
+    private string ChooseSymbol(int spinIndex)
+    {
+        string[] symbols = new string[] { "Clover", "Spade", "Diamond", "Heart" };
+
+        if (spinIndex == 0)
+        {
+            // For the first spin, choose a symbol randomly
+            previousSymbol = symbols[Random.Range(0, symbols.Length)];
+            return previousSymbol;
+        }
+        else if (spinIndex == 1 && previousSymbol != null)
+        {
+            // For the second spin, if the first symbol was something, give 50% chance to get the same symbol again
+            if (Random.value < 0.5f)
+            {
+                return previousSymbol;
+            }
+            else
+            {
+                // 50% chance to get one of the other symbols
+                List<string> otherSymbols = new List<string>(symbols);
+                otherSymbols.Remove(previousSymbol);
+                return otherSymbols[Random.Range(0, otherSymbols.Count)];
+            }
+        }
+        else
+        {
+            // For the third spin, or when previous symbol is not relevant, choose randomly
+            previousSymbol = null;
+            return symbols[Random.Range(0, symbols.Length)];
+        }
+    }
+
+    // Helper function to get the index of a symbol in the sprite array
+    private int GetSpriteIndex(string symbol)
+    {
+        for (int i = 0; i < slotSprites.Length; i++)
+        {
+            if (slotSprites[i].name == symbol)
+            {
+                return i;
+            }
+        }
+        return 0; // Default to the first sprite if not found
+    }
 }
