@@ -10,6 +10,7 @@ public class WaveManager : MonoBehaviour
     private int checkpointWave = 1;
     private int enemiesAlive = 0;
     private Spawner spawner;
+    [SerializeField] AudioSource WaveSoundSource;
 
     private void Awake()
     {
@@ -18,6 +19,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
+        WaveSoundSource = gameObject.GetComponent<AudioSource>();
         spawner = GetComponent<Spawner>();
 
         // Load the checkpoint wave if it exists
@@ -35,6 +37,7 @@ public class WaveManager : MonoBehaviour
         // Check if all enemies are killed
         if (enemiesAlive <= 0)
         {
+            WaveSoundSource.Play();
             StartNextWave();
             Debug.Log("Next Wave");
         }
