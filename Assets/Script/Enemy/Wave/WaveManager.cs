@@ -32,6 +32,14 @@ public class WaveManager : MonoBehaviour
             checkpointWave = PlayerPrefs.GetInt("CheckpointWave");
             currentWave = checkpointWave;
         }
+        else{
+            PlayerPrefs.SetInt("CheckpointWave",1);
+            PlayerPrefs.Save();
+        }
+        if (!PlayerPrefs.HasKey("SpinPoint")){
+            PlayerPrefs.SetInt("SpinPoint",0);
+            PlayerPrefs.Save();
+        }
         
         StartCoroutine(StartWave());
     }
@@ -41,6 +49,7 @@ public class WaveManager : MonoBehaviour
         // Check if all enemies are killed
         if (enemiesAlive <= 0)
         {
+            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint")+5);
             WaveSoundSource.Play();
             StartNextWave();
             Debug.Log("Next Wave");

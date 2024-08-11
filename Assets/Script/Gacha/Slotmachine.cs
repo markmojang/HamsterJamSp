@@ -21,11 +21,8 @@ public class Slotmachine : MonoBehaviour
     private AudioSource spinSoundSource;
     private PlayerController player;
     private PlayerShooter playershoot;
-    private int spin;
-
     void Start()
     {
-        
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         playershoot = GameObject.FindWithTag("Player").transform.GetChild(0).gameObject.GetComponent<PlayerShooter>();
         spinSpeed = spinSpeedfx;
@@ -45,13 +42,11 @@ public class Slotmachine : MonoBehaviour
         backgroundMusicSource.loop = false; // Enable looping
     }
 
-    public void Update(){
-    }
-
     public void StartSpinning()
     {
-        if (!isSpinning)
+        if (!isSpinning && PlayerPrefs.GetInt("SpinPoint") > 0)
         {
+            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint")-1);
             for (int i = 0; i < slotImages.Length; i++)
             {
                 Color imageColor = slotImages[i].color;
