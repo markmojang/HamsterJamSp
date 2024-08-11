@@ -130,6 +130,13 @@ public class Slotmachine : MonoBehaviour
         spinSpeed = spinSpeedfx;
 
         // Stop the background music when spinning stops
-        backgroundMusicSource.Stop();
+        backgroundMusicSource.Stop();   
+        CheckResult();
+    }
+
+    private void CheckResult(){
+        if(slotImages[0].sprite.name == slotImages[1].sprite.name && slotImages[1].sprite.name == slotImages[2].sprite.name){
+            Debug.Log("You have win" + slotImages[0].sprite.name);
+        }
     }
 }

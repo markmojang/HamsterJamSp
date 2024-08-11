@@ -42,7 +42,6 @@ public class PlayerShooter : MonoBehaviour
         rb.velocity = direction * bulletSpeed;
 
         StartCoroutine(vanishbullet(bullet));
-        
     }
 
     IEnumerator vanishbullet(GameObject objects){

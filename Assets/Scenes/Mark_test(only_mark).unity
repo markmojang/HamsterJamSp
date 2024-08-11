@@ -826,6 +826,8 @@ MonoBehaviour:
   Damage: 100
   moveSpeed: 10
   healthBar: {fileID: 47607610}
+  iFrameDuration: 1.5
+  blinkInterval: 0.15
 --- !u!50 &1113387900
 Rigidbody2D:
   serializedVersion: 4
