@@ -53,9 +53,11 @@ public class PauseMenuController : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
+                Cursor.visible = false;
             }
             else
             {
+                Cursor.visible = true;
                 PauseGame();
             }
         }
