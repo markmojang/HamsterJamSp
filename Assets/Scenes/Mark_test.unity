@@ -364,6 +364,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7945460381151442184, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_Name
       value: PauseCanvas
@@ -6384,7 +6388,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.07450981, g: 0.07450981, b: 0.07450981, a: 1}
+  m_BackGroundColor: {r: 0.10980392, g: 0.07058824, b: 0.10980392, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -6910,7 +6914,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!224 &1888895830
 RectTransform:
