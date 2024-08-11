@@ -13,6 +13,8 @@ public class PlayerShooter : MonoBehaviour
     [SerializeField] private float bulletlifespan;
     void Start() 
     {
+        fireRate = PlayerPrefs.GetFloat("PFirerate");
+        bulletSpeed = PlayerPrefs.GetFloat("PVelocity");
         mainCamera = Camera.main; 
     }
     

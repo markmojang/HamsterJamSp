@@ -13,12 +13,13 @@ public class WaveManager : MonoBehaviour
     private PlayerController player;
     [SerializeField] AudioSource WaveSoundSource;
     private WaveUI waveUI; // Reference to the WaveUI
-
+    private PlayerShooter playershoot;
     private void Start()
     {
         WaveSoundSource = gameObject.GetComponent<AudioSource>();
         spawner = GetComponent<Spawner>();
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
+        playershoot = GameObject.FindWithTag("Player").transform.GetChild(0).gameObject.GetComponent<PlayerShooter>();
         waveUI = FindObjectOfType<WaveUI>(); // Find the WaveUI in the scene
 
         // Load the checkpoint wave if it exists
@@ -78,7 +79,14 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         player.health = player.maxhp;
         player.UpdateHealthBar();
-
+        if(currentWave > 1){
+            PlayerPrefs.SetFloat("PmaxHp", player.maxhp);
+            PlayerPrefs.SetFloat("PDamage", player.Damage);
+            PlayerPrefs.SetFloat("PMoveSpeed", player.moveSpeed);
+            PlayerPrefs.SetFloat("PFirerate", playershoot.fireRate);
+            PlayerPrefs.SetFloat("PVelocity", playershoot.bulletSpeed);
+            PlayerPrefs.Save();
+        }
         // Trigger the "NEXT WAVE!!" text animation
         if (waveUI != null)
         {

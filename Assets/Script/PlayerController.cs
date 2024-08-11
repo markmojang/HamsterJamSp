@@ -6,10 +6,10 @@ using TMPro; // Add this namespace
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxhp = 100;
+    public float maxhp = 200;
     public float health;
     public float Damage = 100;
-    public float moveSpeed = 3f;
+    public float moveSpeed = 13;
     private Rigidbody2D rb;
     [SerializeField] private Image healthBar;
     [SerializeField] float iFrameDuration = 1.5f; // Duration of invincibility in seconds
@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        maxhp = PlayerPrefs.GetFloat("PmaxHp");
+        health = PlayerPrefs.GetFloat("PMoveSpeed");
+        Damage = PlayerPrefs.GetFloat("PDamage");
+        moveSpeed = PlayerPrefs.GetFloat("PMoveSpeed");
         health = maxhp;
         rb = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
