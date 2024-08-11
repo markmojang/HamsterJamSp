@@ -8203,7 +8203,7 @@ MonoBehaviour:
   target: {fileID: 1113387902}
   zoomSpeed: 15
   minZoom: 5
-  maxZoom: 20
+  maxZoom: 22
   zoomSmoothTime: 0.1
 --- !u!114 &1632763578
 MonoBehaviour:

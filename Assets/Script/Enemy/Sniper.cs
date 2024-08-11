@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Sniper : Enemy
 {
-    public float rotationSpeed = 5f;
-    public float attackRange = 10f;
+    public float rotationSpeed = 20f;
+    public float attackRange = 100f;
     public GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullet will be shot
-    public float bulletSpeed = 20f; // Speed of the bullet
+    public float bulletSpeed = 40f; // Speed of the bullet
     public float fireRate = 2f; // Time between shots in seconds
+    public float retreatSpeedMultiplier = 25f; // Multiplier for speed when retreating
 
     private float nextFireTime = 0f;
     private WaveManager waveManager;
@@ -17,20 +18,19 @@ public class Sniper : Enemy
     {
         waveManager = FindObjectOfType<WaveManager>();
         currentWave = waveManager.currentWave - 1;
-        float multiplier = 1f + (currentWave*0.1f);
+        float multiplier = 1f + (currentWave * 0.1f);
         health = 50f * multiplier;
-        damage = 40f * multiplier;
+        damage = 60f * multiplier;
         speed = 5f;
 
         base.Start();
     }
 
-
     private void Update()
     {
         MaintainDistanceFromPlayer();
         LookAtPlayer();
-        
+
         if (Time.time >= nextFireTime)
         {
             Fire();
@@ -44,13 +44,15 @@ public class Sniper : Enemy
 
         if (distance < attackRange)
         {
-            // Move away from the player
-            transform.position = Vector3.MoveTowards(transform.position, player.position, -speed * Time.deltaTime);
+            // Move away from the player with increased speed to maintain the attack range
+            Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
+            transform.position += directionAwayFromPlayer * speed * retreatSpeedMultiplier * Time.deltaTime;
         }
         else if (distance > attackRange)
         {
-            // Move closer to the player
-            transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
+            // Move towards the player if too far from the attack range
+            Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
+            transform.position += directionTowardsPlayer * speed * Time.deltaTime;
         }
     }
 
@@ -64,7 +66,7 @@ public class Sniper : Enemy
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
         float currentAngle = transform.rotation.eulerAngles.z;
-        
+
         float angle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));

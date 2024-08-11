@@ -6,7 +6,7 @@ using TMPro; // Add this namespace
 
 public class PlayerController : MonoBehaviour
 {
-    public float maxhp = 200;
+    public float maxhp = 99999;
     public float health;
     public float Damage = 100;
     public float moveSpeed = 13;
