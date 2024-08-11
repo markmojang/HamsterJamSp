@@ -163,7 +163,7 @@ MonoBehaviour:
   health: 50
   damage: 50
   speed: 3
-  deathSFX: {fileID: 8300000, guid: e8706f800cf74bd4b9e132b4a282b8c9, type: 3}
+  deathSFX: {fileID: 8300000, guid: c9ad6ee8b25e4194ab8b58017da54e71, type: 3}
   hitSFX: {fileID: 8300000, guid: aa02c40339398994c98428ce8e64a7dc, type: 3}
   rotationSpeed: 5
   attackRange: 10
