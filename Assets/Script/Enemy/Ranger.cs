@@ -22,7 +22,7 @@ public class Ranger : Enemy
         float multiplier = 1f + (currentWave*0.1f);
         health = 100f * multiplier;
         damage = 20f * multiplier;
-        speed = 2f;
+        speed = 5f;
 
         base.Start();
     }

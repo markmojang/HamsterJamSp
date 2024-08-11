@@ -24,7 +24,7 @@ public class Tank : Enemy
         float multiplier = 1f + (currentWave*0.1f);
         health = 200f * multiplier;
         damage = 10f * multiplier;
-        speed = 5.0f;
+        speed = 7f;
 
         base.Start();
     }

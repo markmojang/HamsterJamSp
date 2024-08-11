@@ -19,8 +19,8 @@ public class Sniper : Enemy
         currentWave = waveManager.currentWave - 1;
         float multiplier = 1f + (currentWave*0.1f);
         health = 50f * multiplier;
-        damage = 50f * multiplier;
-        speed = 1.5f;
+        damage = 40f * multiplier;
+        speed = 5f;
 
         base.Start();
     }
