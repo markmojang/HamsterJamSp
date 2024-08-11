@@ -21,6 +21,7 @@ public class Slotmachine : MonoBehaviour
     private AudioSource spinSoundSource;
     private PlayerController player;
     private PlayerShooter playershoot;
+    private int spin;
 
     void Start()
     {

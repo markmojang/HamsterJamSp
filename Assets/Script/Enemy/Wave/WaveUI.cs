@@ -58,7 +58,8 @@ public class WaveUI : MonoBehaviour
         if (zoomText != null && cameraController != null)
         {
             float currentZoom = cameraController.Cam.orthographic ? cameraController.Cam.orthographicSize : cameraController.Cam.fieldOfView;
-            zoomText.text = "ZOOM " + currentZoom.ToString("F1");
+            currentZoom = 5/currentZoom;
+            zoomText.text = "ZOOM " + currentZoom.ToString("F1") + "X";
         }
     }
 }

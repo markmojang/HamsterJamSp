@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         waveManager.ResetToCheckpoint();
     }
 
-    void UpdateHealthBar()
+    public void UpdateHealthBar()
     {
         // Calculate the fill amount based on current health and max health
         float fillAmount = health / maxhp;

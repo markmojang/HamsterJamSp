@@ -10,7 +10,10 @@ public class WaveManager : MonoBehaviour
     private int checkpointWave = 1;
     private int enemiesAlive = 0;
     private Spawner spawner;
+    private PlayerController player;
     [SerializeField] AudioSource WaveSoundSource;
+
+
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class WaveManager : MonoBehaviour
     {
         WaveSoundSource = gameObject.GetComponent<AudioSource>();
         spawner = GetComponent<Spawner>();
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
 
         // Load the checkpoint wave if it exists
         if (PlayerPrefs.HasKey("CheckpointWave"))
@@ -70,6 +74,8 @@ public class WaveManager : MonoBehaviour
     private void StartNextWave()
     {
         currentWave++;
+        player.health = player.maxhp;
+        player.UpdateHealthBar();
         StartCoroutine(StartWave());
     }
 
