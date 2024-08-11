@@ -5,6 +5,7 @@ using UnityEngine;
 public class Playerbullet : MonoBehaviour
 {
     private float damage;
+    public GameObject hitEffect;
     void Start(){
         damage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Damage;
     }
@@ -15,6 +16,12 @@ public class Playerbullet : MonoBehaviour
         {
             // ศัตรูได้รับความเสียหาย
             enemy.TakeDamage(damage); // สมมติว่าคุณมีตัวแปร damage ในสคริปต์นี้เพื่อเก็บค่าความเสียหายที่ต้องการทำ
+            // Instantiate the particle effect at the player's position
+            if (hitEffect != null)
+            {
+                GameObject effect = Instantiate(hitEffect, col.transform.position, Quaternion.identity);
+                Destroy(effect, 1f); // Adjust the duration as needed
+            }
             ObjectPool.Instance.ReturnObjectToPool(gameObject);
         }
     }

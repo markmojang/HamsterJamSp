@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    
+    public GameObject hitEffect;
+
     public float bulletSpeed = 10f;
     public float fireRate = 0.5f;
     private float firect = 0f;
