@@ -36,17 +36,14 @@ public abstract class Enemy : MonoBehaviour
         // Notify WaveManager
         FindObjectOfType<WaveManager>().EnemyKilled();
 
+        // Add currency to the player
+        PlayerUpgrades playerUpgrades = FindObjectOfType<PlayerUpgrades>();
+        if (playerUpgrades != null)
+        {
+            playerUpgrades.AddCurrency(1); // Add 1 currency
+        }
+
         // Handle enemy death, e.g., play animation, remove from game
         Destroy(gameObject);
-    }
-
-    public void SetHealth(float newHealth)
-    {
-        health = newHealth;
-    }
-
-    public void SetDamage(float newDamage)
-    {
-        damage = newDamage;
     }
 }
