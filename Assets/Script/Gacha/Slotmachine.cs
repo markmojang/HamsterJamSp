@@ -26,7 +26,7 @@ public class Slotmachine : MonoBehaviour
     {
         
         player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
-        playershoot = FindObjectsOfType<PlayerShooter>();
+        playershoot = GameObject.FindWithTag("Player").transform.GetChild(0).gameObject.GetComponent<PlayerShooter>();
         spinSpeed = spinSpeedfx;
         for (int i = 0; i < slotImages.Length; i++)
         {
@@ -164,7 +164,7 @@ public class Slotmachine : MonoBehaviour
         }
     }
 
-    private IEnumenator Clover(){
+    private IEnumerator Clover(){
         playershoot.fireRate /= 2; 
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
@@ -172,20 +172,21 @@ public class Slotmachine : MonoBehaviour
         playershoot.bulletSpeed /= 2;
     }
 
-    private IEnumenator Spade(){
-        player.movespeed *= 2;
+    private IEnumerator Spade(){
+        player.moveSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        player.movespeed /= 2;
+        player.moveSpeed /= 2;
     }
 
-    private IEnumenator Diamond(){
-        player.damage *= 2;
+    private IEnumerator Diamond(){
+        player.Damage *= 2;
         yield return new WaitForSeconds(4f);
-        player.damage /= 2;
+        player.Damage /= 2;
     }
 
-    private IEnumenator Heart(){
+    private IEnumerator Heart(){
         player.health = player.maxhp;
+        yield return null;
     }
     
 }
