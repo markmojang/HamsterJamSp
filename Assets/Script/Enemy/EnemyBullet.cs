@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
@@ -30,7 +31,13 @@ public class EnemyBullet : MonoBehaviour
             {
                 StartCoroutine(cameraShake.Shake(0.3f, 0.6f)); // Adjust duration and magnitude as needed
             }
-
+            // Return the bullet to the pool
+            ReturnToPool();
         }
+    }
+    private void ReturnToPool()
+    {
+        // Return the bullet instance to the pool
+        ObjectPool.Instance.ReturnObjectToPool("EnemyBullets", gameObject);
     }
 }

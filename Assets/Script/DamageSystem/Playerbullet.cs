@@ -2,27 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Playerbullet : MonoBehaviour
+public class PlayerBullet : MonoBehaviour
 {
     private float damage;
     public GameObject hitEffect;
-    void Start(){
+
+    void Start()
+    {
         damage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Damage;
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        Enemy enemy = col.GetComponent<Enemy>(); // หา component Enemy จากวัตถุที่ชน
-        if (enemy != null) 
+        Enemy enemy = col.GetComponent<Enemy>();
+        if (enemy != null)
         {
-            // ศัตรูได้รับความเสียหาย
-            enemy.TakeDamage(damage); // สมมติว่าคุณมีตัวแปร damage ในสคริปต์นี้เพื่อเก็บค่าความเสียหายที่ต้องการทำ
-            // Instantiate the particle effect at the player's position
+            // Deal damage to the enemy
+            enemy.TakeDamage(damage);
+
+            // Instantiate the hit effect at the collision point
             if (hitEffect != null)
             {
                 GameObject effect = Instantiate(hitEffect, col.transform.position, Quaternion.identity);
-                Destroy(effect, 1f); // Adjust the duration as needed
+                Destroy(effect, 1f); // Adjust duration as needed
             }
-            ObjectPool.Instance.ReturnObjectToPool(gameObject);
+
+            // Return the bullet to the pool
+            ReturnToPool();
         }
+    }
+
+    private void ReturnToPool()
+    {
+        // Return the bullet instance to the pool
+        ObjectPool.Instance.ReturnObjectToPool("PlayerBullets", gameObject);
     }
 }

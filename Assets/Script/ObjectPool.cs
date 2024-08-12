@@ -1,60 +1,86 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ObjectPool : MonoBehaviour
 {
-    public static ObjectPool Instance;   
- // Singleton instance for easy access
+    public static ObjectPool Instance;
 
-    public GameObject objectPrefab; 
-
-    private Queue<GameObject> objectQueue = new Queue<GameObject>();
-    [SerializeField]private int initialPoolSize = 10; // Initial number of objects in the pool
+    private Dictionary<string, Queue<GameObject>> pools = new Dictionary<string, Queue<GameObject>>();
+    private Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>(); // Store prefabs for each pool
+    private Dictionary<string, int> poolSizes = new Dictionary<string, int>(); // Track pool sizes
 
     void Awake()
     {
-        // Singleton pattern setup
-        if (Instance == null)
+        Instance = this;
+    }
+
+    // Create or initialize a pool with a specified size
+    public void CreatePool(string poolKey, GameObject prefab, int initialSize)
+    {
+        if (!pools.ContainsKey(poolKey))
         {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            Queue<GameObject> newPool = new Queue<GameObject>();
+
+            for (int i = 0; i < initialSize; i++)
+            {
+                GameObject obj = Instantiate(prefab);
+                obj.SetActive(false);
+                newPool.Enqueue(obj);
+            }
+
+            pools.Add(poolKey, newPool);
+            prefabs.Add(poolKey, prefab);
+            poolSizes.Add(poolKey, initialSize);
         }
     }
 
-    void Start()
+    // Retrieve an object from the pool; create a new one if necessary
+    public GameObject GetObjectFromPool(string poolKey)
     {
-        // Pre-instantiate objects and add them to the pool
-        for (int i = 0; i < initialPoolSize; i++)
+        if (pools.ContainsKey(poolKey))
         {
-            GameObject obj = Instantiate(objectPrefab);
+            if (pools[poolKey].Count > 0)
+            {
+                GameObject obj = pools[poolKey].Dequeue();
+                obj.SetActive(true);
+                return obj;
+            }
+            else
+            {
+                // Optional: Increase the pool size if needed
+                IncreasePoolSize(poolKey);
+                return GetObjectFromPool(poolKey); // Try again after increasing the pool size
+            }
+        }
+        return null;
+    }
+
+    // Return an object to the pool
+    public void ReturnObjectToPool(string poolKey, GameObject obj)
+    {
+        if (pools.ContainsKey(poolKey))
+        {
             obj.SetActive(false);
-            objectQueue.Enqueue(obj);
+            pools[poolKey].Enqueue(obj);
         }
     }
 
-    public GameObject GetObjectFromPool()
+    // Increase the pool size by creating additional objects
+    private void IncreasePoolSize(string poolKey)
     {
-        if (objectQueue.Count > 0)
+        if (pools.ContainsKey(poolKey) && prefabs.ContainsKey(poolKey))
         {
-            GameObject obj = objectQueue.Dequeue();
-            obj.SetActive(true);
-            return obj;
-        }
-        else   
+            int currentSize = pools[poolKey].Count;
+            int newSize = poolSizes[poolKey] + 10; // Increase by a fixed amount (e.g., 10)
 
-        {
-            // If the pool is empty, create a new object 
-            GameObject obj = Instantiate(objectPrefab);
-            return obj;
-        }
-    }
+            for (int i = currentSize; i < newSize; i++)
+            {
+                GameObject obj = Instantiate(prefabs[poolKey]);
+                obj.SetActive(false);
+                pools[poolKey].Enqueue(obj);
+            }
 
-    public void ReturnObjectToPool(GameObject obj)
-    {
-        obj.SetActive(false);
-        objectQueue.Enqueue(obj);
+            poolSizes[poolKey] = newSize;
+        }
     }
 }

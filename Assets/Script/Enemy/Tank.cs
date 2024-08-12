@@ -1,11 +1,12 @@
+using System.Collections;
 using UnityEngine;
 
 public class Tank : Enemy
 {
     public float rotationSpeed = 5f;
-    public float minDistance = 1f; 
+    public float minDistance = 1f;
     public float attackRange = 2f;
-    public GameObject bulletPrefab; // The enemy bullet prefab
+    [SerializeField] private GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullets will be shot
     public float bulletSpeed = 10f; // Speed of the bullets
     public float fireRate = 3f; // Time between shots in seconds
@@ -21,10 +22,13 @@ public class Tank : Enemy
     {
         waveManager = FindObjectOfType<WaveManager>();
         currentWave = waveManager.currentWave - 1;
-        float multiplier = 1f + (currentWave*0.1f);
+        float multiplier = 1f + (currentWave * 0.1f);
         health = 200f * multiplier;
         damage = 20f * multiplier;
         speed = 7f;
+
+        // Create the object pool for enemy bullets
+        ObjectPool.Instance.CreatePool("EnemyBullets", bulletPrefab, 10);
 
         base.Start();
     }
@@ -65,7 +69,7 @@ public class Tank : Enemy
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90;
 
         float currentAngle = transform.rotation.eulerAngles.z;
-        
+
         float angle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
@@ -83,11 +87,11 @@ public class Tank : Enemy
 
     private void FireShotgun()
     {
-    // Fire the first set of bullets
-    FireShotgunSet();
+        // Fire the first set of bullets
+        FireShotgunSet();
 
-    // Optional: Add a short delay between the two sets
-    Invoke("FireShotgunSet", 0.2f); // Adjust the delay as needed
+        // Optional: Add a short delay between the two sets
+        Invoke("FireShotgunSet", 0.2f); // Adjust the delay as needed
     }
 
     private void FireShotgunSet()
@@ -100,17 +104,31 @@ public class Tank : Enemy
             float currentAngle = startAngle + (i * angleStep);
             Quaternion bulletRotation = firePoint.rotation * Quaternion.Euler(0, 0, currentAngle);
 
-            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, bulletRotation);
-            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-            EnemyBullet DMG = bullet.GetComponent<EnemyBullet>();
-            DMG.damage = damage;
+            GameObject bullet = ObjectPool.Instance.GetObjectFromPool("EnemyBullets");
 
-            if (rb != null)
+            if (bullet != null)
             {
-                Vector3 direction = bulletRotation * Vector3.up;
-                rb.velocity = direction * bulletSpeed;
+                bullet.transform.position = firePoint.position;
+                bullet.transform.rotation = bulletRotation;
+
+                Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+                EnemyBullet DMG = bullet.GetComponent<EnemyBullet>();
+                DMG.damage = damage;
+
+                if (rb != null)
+                {
+                    Vector3 direction = bulletRotation * Vector3.up;
+                    rb.velocity = direction * bulletSpeed;
+                }
+
+                StartCoroutine(ReturnToPoolAfterDelay(bullet, 8f));
             }
-            Destroy(bullet, 8f);
         }
+    }
+
+    private IEnumerator ReturnToPoolAfterDelay(GameObject bullet, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ObjectPool.Instance.ReturnObjectToPool("EnemyBullets", bullet);
     }
 }

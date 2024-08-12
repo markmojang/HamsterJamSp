@@ -1,10 +1,11 @@
+using System.Collections;
 using UnityEngine;
 
 public class Sniper : Enemy
 {
     public float rotationSpeed = 20f;
     public float attackRange = 100f;
-    public GameObject bulletPrefab; // The enemy bullet prefab
+    [SerializeField] private GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullet will be shot
     public float bulletSpeed = 40f; // Speed of the bullet
     public float fireRate = 2f; // Time between shots in seconds
@@ -21,6 +22,9 @@ public class Sniper : Enemy
         health = 50f * multiplier;
         damage = 60f * multiplier;
         speed = 5f;
+
+        // Create the object pool for enemy bullets
+        ObjectPool.Instance.CreatePool("EnemyBullets", bulletPrefab, 10);
 
         base.Start();
     }
@@ -43,12 +47,17 @@ public class Sniper : Enemy
 
         if (distance < attackRange)
         {
-            // Move away from the player with increased speed to maintain the attack range
+            // Move away from the player if too close
             Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
-            transform.position += directionAwayFromPlayer * (speed * 5f) * Time.deltaTime;
+            transform.position += directionAwayFromPlayer * (speed * Time.deltaTime);
+        }
+        else if (distance > attackRange)
+        {
+            // Move towards the player if too far
+            Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
+            transform.position += directionTowardsPlayer * (speed * Time.deltaTime);
         }
     }
-
 
     private void LookAtPlayer()
     {
@@ -68,16 +77,30 @@ public class Sniper : Enemy
 
     private void Fire()
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        EnemyBullet DMG = bullet.GetComponent<EnemyBullet>();
-        DMG.damage = damage;
+        GameObject bullet = ObjectPool.Instance.GetObjectFromPool("EnemyBullets");
 
-        if (rb != null)
+        if (bullet != null)
         {
-            Vector3 direction = (player.position - firePoint.position).normalized;
-            rb.velocity = direction * bulletSpeed;
+            bullet.transform.position = firePoint.position;
+            bullet.transform.rotation = firePoint.rotation;
+
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            EnemyBullet DMG = bullet.GetComponent<EnemyBullet>();
+            DMG.damage = damage;
+
+            if (rb != null)
+            {
+                Vector3 direction = (player.position - firePoint.position).normalized;
+                rb.velocity = direction * bulletSpeed;
+            }
+
+            StartCoroutine(ReturnToPoolAfterDelay(bullet, 8f));
         }
-        Destroy(bullet, 8f);
+    }
+
+    private IEnumerator ReturnToPoolAfterDelay(GameObject bullet, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        ObjectPool.Instance.ReturnObjectToPool("EnemyBullets", bullet);
     }
 }

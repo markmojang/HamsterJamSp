@@ -37,6 +37,12 @@ public class CameraController : MonoBehaviour
 
     void Update()
     {
+        // Check if the game is paused
+        if (Time.timeScale == 0)
+        {
+            return; // Exit the Update method if the game is paused
+        }
+
         // Handle zooming
         float scrollInput = Input.GetAxis("Mouse ScrollWheel");
         targetZoom -= scrollInput * zoomSpeed; // Adjust the target zoom based on scroll input
