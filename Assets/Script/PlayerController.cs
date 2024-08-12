@@ -66,6 +66,7 @@ public class PlayerController : MonoBehaviour
 
         // Update the UI with the current stats
         UpdateStatUI();
+        UpdateHealthBar();
     }
 
     public void TakeDamage(float amount)

@@ -8,7 +8,6 @@ public class Sniper : Enemy
     public Transform firePoint; // The fire point from where the bullet will be shot
     public float bulletSpeed = 40f; // Speed of the bullet
     public float fireRate = 2f; // Time between shots in seconds
-    public float retreatSpeedMultiplier = 25f; // Multiplier for speed when retreating
 
     private float nextFireTime = 0f;
     private WaveManager waveManager;
@@ -46,15 +45,10 @@ public class Sniper : Enemy
         {
             // Move away from the player with increased speed to maintain the attack range
             Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
-            transform.position += directionAwayFromPlayer * speed * retreatSpeedMultiplier * Time.deltaTime;
-        }
-        else if (distance > attackRange)
-        {
-            // Move towards the player if too far from the attack range
-            Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
-            transform.position += directionTowardsPlayer * speed * Time.deltaTime;
+            transform.position += directionAwayFromPlayer * (speed * 5f) * Time.deltaTime;
         }
     }
+
 
     private void LookAtPlayer()
     {

@@ -3,7 +3,10 @@ guid: 6c724b15a229faa4eb0c52950faacb93
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - deathSFX: {instanceID: 0}
+  - hitSFX: {instanceID: 0}
+  - flashMaterial: {fileID: 2100000, guid: eed6cd77b4ef4484590282ab5decebe0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
