@@ -31,7 +31,6 @@ public class EnemyBullet : MonoBehaviour
                 StartCoroutine(cameraShake.Shake(0.3f, 0.6f)); // Adjust duration and magnitude as needed
             }
 
-            Destroy(gameObject, 3f);
         }
     }
 }

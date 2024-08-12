@@ -110,6 +110,7 @@ public class Tank : Enemy
                 Vector3 direction = bulletRotation * Vector3.up;
                 rb.velocity = direction * bulletSpeed;
             }
+            Destroy(bullet, 8f);
         }
     }
 }

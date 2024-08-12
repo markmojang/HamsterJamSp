@@ -78,5 +78,6 @@ public class Sniper : Enemy
             Vector3 direction = (player.position - firePoint.position).normalized;
             rb.velocity = direction * bulletSpeed;
         }
+        Destroy(bullet, 8f);
     }
 }
