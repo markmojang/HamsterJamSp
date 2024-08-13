@@ -6,6 +6,7 @@ using TMPro;
 
 public class Slotmachine : MonoBehaviour
 {
+    
     public Image[] slotImages; // Array to hold the images representing the slots
     public Sprite[] slotSprites; // Array to hold the possible sprites for the slots
     [SerializeField] private float spinSpeedfx;
@@ -22,7 +23,6 @@ public class Slotmachine : MonoBehaviour
     private AudioSource spinSoundSource;
     private PlayerController player;
     private PlayerShooter playershoot;
-
     private string previousSymbol = null;
 
     void Start()
@@ -177,25 +177,37 @@ public class Slotmachine : MonoBehaviour
 
     private IEnumerator Clover()
     {
+        float basestat1 = playershoot.fireRate;
+        float basestat2 = playershoot.bulletSpeed;
         playershoot.fireRate /= 2;
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        playershoot.fireRate *= 2;
-        playershoot.bulletSpeed /= 2;
+        basestat1 = basestat1 - (basestat1/2 - playershoot.fireRate);
+        basestat2 = basestat2 + (playershoot.bulletSpeed - basestat2*2);
+        playershoot.fireRate = basestat1;
+        playershoot.bulletSpeed = basestat2;
+        PlayerPrefs.SetFloat("PFirerate", basestat1);
+        PlayerPrefs.SetFloat("PVelocity", basestat2);
     }
 
     private IEnumerator Spade()
     {
+        float basestat1 = player.moveSpeed;
         player.moveSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        player.moveSpeed /= 2;
+        basestat1  = basestat1 + (player.moveSpeed - basestat1*2);
+        player.moveSpeed = basestat1;
+        PlayerPrefs.SetFloat("PMoveSpeed", basestat1);
     }
 
     private IEnumerator Diamond()
     {
+        float basestat1 = player.Damage;
         player.Damage *= 2;
         yield return new WaitForSeconds(4f);
-        player.Damage /= 2;
+        basestat1 = basestat1 + (player.Damage - basestat1*2);
+        player.Damage = basestat1;
+        PlayerPrefs.SetFloat("PDamage", basestat1);
     }
 
     private IEnumerator Heart()
@@ -215,7 +227,7 @@ public class Slotmachine : MonoBehaviour
             previousSymbol = symbols[Random.Range(0, symbols.Length)];
             return previousSymbol;
         }
-        else if (spinIndex == 1 && previousSymbol != null)
+        else if (spinIndex >= 1 && previousSymbol != null)
         {
             // For the second spin, if the first symbol was something, give 50% chance to get the same symbol again
             if (Random.value < 0.5f)
