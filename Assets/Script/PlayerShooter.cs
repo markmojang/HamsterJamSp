@@ -9,7 +9,6 @@ public class PlayerShooter : MonoBehaviour
     public float fireRate = 0.5f;
     private float firect = 0f;
     private Camera mainCamera;
-    private int time = 1;
     [SerializeField] private float bulletlifespan;
 
     void Start()
