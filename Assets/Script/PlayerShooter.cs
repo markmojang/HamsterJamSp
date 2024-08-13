@@ -61,8 +61,6 @@ public class PlayerShooter : MonoBehaviour
         {
             if (!objects.activeSelf) // Check if the GameObject is inactive
             {
-                elapsedTime = 0f; // Reset the timer
-                Debug.Log("Reset Timer " + time.ToString());
                 checkes = true;
                 break;
             }
@@ -73,9 +71,7 @@ public class PlayerShooter : MonoBehaviour
             yield return null;
         }
         if(!checkes){
-            Debug.Log("Returned " + time.ToString());
             ObjectPool.Instance.ReturnObjectToPool("PlayerBullets", objects);
-            time++;
         }
         
     }
