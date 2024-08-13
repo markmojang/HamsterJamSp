@@ -31,9 +31,9 @@ public class LookAtCursor : MonoBehaviour
         float angle = Mathf.LerpAngle(currentAngle, targetAngle, rotationSpeed * Time.deltaTime);
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetAngle));
+        // arrow.transform.rotation = Quaternion.Euler(new Vector3(0, 0, targetAngle));
 
-        Vector3 arrowPosition = transform.position + (Vector3)direction.normalized * distanceFromCenter;
-        arrow.transform.position = arrowPosition;
+        // Vector3 arrowPosition = transform.position + (Vector3)direction.normalized * distanceFromCenter;
+        // arrow.transform.position = arrowPosition;
     }
 }

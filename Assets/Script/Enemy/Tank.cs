@@ -129,7 +129,24 @@ public class Tank : Enemy
 
     private IEnumerator ReturnToPoolAfterDelay(GameObject bullet, float delay)
     {
-        yield return new WaitForSeconds(delay);
-        ObjectPool.Instance.ReturnObjectToPool("EnemyBullets", bullet);
+        float elapsedTime = 0f;
+        bool checkes = false;
+        while (elapsedTime <= delay)
+        {
+            if (!bullet.activeSelf) // Check if the GameObject is inactive
+            {
+                checkes = true;
+                break;
+            }
+            else
+            {
+                elapsedTime += Time.deltaTime;
+            }
+            yield return null;
+        }
+        if(!checkes){
+            ObjectPool.Instance.ReturnObjectToPool("EnemyBullets", bullet);
+        }
+        
     }
 }
