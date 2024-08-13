@@ -6,6 +6,7 @@ public class Tank : Enemy
     public float rotationSpeed = 5f;
     public float minDistance = 1f;
     public float attackRange = 2f;
+
     [SerializeField] private GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullets will be shot
     public float bulletSpeed = 10f; // Speed of the bullets

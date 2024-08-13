@@ -169,8 +169,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11da2b439adee3d4881faf615b7af657, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectPrefab: {fileID: 901066052834134931, guid: cc36e3a654de7664cad9adaae08e9cb8, type: 3}
-  initialPoolSize: 20
 --- !u!114 &210634477
 MonoBehaviour:
   m_ObjectHideFlags: 0

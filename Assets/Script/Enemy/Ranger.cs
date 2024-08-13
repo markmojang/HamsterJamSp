@@ -4,9 +4,10 @@ using UnityEngine;
 public class Ranger : Enemy
 {
     public float rotationSpeed = 10f;
-    public float surroundingRadius = 25f; // Desired distance from player
-    public float orbitSpeed = 1f; // Speed at which enemies orbit around the player
+    public float surroundingRadius = 20f; // Desired distance from player
+    public float orbitSpeed = 100f; // Speed at which enemies orbit around the player
     public float attackRange = 40f;
+
     [SerializeField] private GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullets will be shot
     public float bulletSpeed = 20f; // Speed of the bullets
@@ -75,7 +76,7 @@ public class Ranger : Enemy
         Vector3 targetPosition = player.position + offset;
 
         // Check for nearby Rangers at similar positions
-        Collider2D[] nearbyRangers = Physics2D.OverlapCircleAll(targetPosition, 1f);
+        Collider2D[] nearbyRangers = Physics2D.OverlapCircleAll(targetPosition, 10f);
         foreach (Collider2D rangerCollider in nearbyRangers)
         {
             Ranger otherRanger = rangerCollider.GetComponent<Ranger>();
@@ -83,7 +84,7 @@ public class Ranger : Enemy
             {
                 // If the other Ranger is too close, adjust the position
                 Vector3 directionAway = (transform.position - otherRanger.transform.position).normalized;
-                targetPosition += directionAway * 1f; // Adjust this value for desired spacing
+                targetPosition += directionAway * 10f; // Adjust this value for desired spacing
             }
         }
 

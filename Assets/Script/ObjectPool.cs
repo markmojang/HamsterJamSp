@@ -9,6 +9,8 @@ public class ObjectPool : MonoBehaviour
     private Dictionary<string, GameObject> prefabs = new Dictionary<string, GameObject>(); // Store prefabs for each pool
     private Dictionary<string, int> poolSizes = new Dictionary<string, int>(); // Track pool sizes
 
+    private const int poolIncreaseAmount = 10; // Amount to increase pool size by
+
     void Awake()
     {
         Instance = this;
@@ -48,7 +50,7 @@ public class ObjectPool : MonoBehaviour
             else
             {
                 // Optional: Increase the pool size if needed
-                IncreasePoolSize(poolKey);
+                IncreasePoolSize(poolKey, poolIncreaseAmount);
                 return GetObjectFromPool(poolKey); // Try again after increasing the pool size
             }
         }
@@ -63,24 +65,27 @@ public class ObjectPool : MonoBehaviour
             obj.SetActive(false);
             pools[poolKey].Enqueue(obj);
         }
+
+        // Proactive pool size increase if needed
+        if (pools[poolKey].Count < poolIncreaseAmount)
+        {
+            IncreasePoolSize(poolKey, poolIncreaseAmount);
+        }
     }
 
     // Increase the pool size by creating additional objects
-    private void IncreasePoolSize(string poolKey)
+    private void IncreasePoolSize(string poolKey, int increaseAmount)
     {
         if (pools.ContainsKey(poolKey) && prefabs.ContainsKey(poolKey))
         {
-            int currentSize = pools[poolKey].Count;
-            int newSize = poolSizes[poolKey] + 10; // Increase by a fixed amount (e.g., 10)
-
-            for (int i = currentSize; i < newSize; i++)
+            for (int i = 0; i < increaseAmount; i++)
             {
                 GameObject obj = Instantiate(prefabs[poolKey]);
                 obj.SetActive(false);
                 pools[poolKey].Enqueue(obj);
             }
 
-            poolSizes[poolKey] = newSize;
+            poolSizes[poolKey] += increaseAmount;
         }
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 public class Sniper : Enemy
 {
     public float rotationSpeed = 20f;
-    public float attackRange = 100f;
+    public float attackRange = 40f;
+
     [SerializeField] private GameObject bulletPrefab; // The enemy bullet prefab
     public Transform firePoint; // The fire point from where the bullet will be shot
     public float bulletSpeed = 40f; // Speed of the bullet
@@ -49,13 +50,13 @@ public class Sniper : Enemy
         {
             // Move away from the player if too close
             Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
-            transform.position += directionAwayFromPlayer * (speed * Time.deltaTime);
+            transform.position += directionAwayFromPlayer * (speed * 2.25f) * Time.deltaTime;
         }
         else if (distance > attackRange)
         {
             // Move towards the player if too far
             Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
-            transform.position += directionTowardsPlayer * (speed * Time.deltaTime);
+            transform.position += directionTowardsPlayer * speed* Time.deltaTime;
         }
     }
 
