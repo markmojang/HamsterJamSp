@@ -155,7 +155,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &210634476
 MonoBehaviour:
@@ -453,7 +453,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1213,7 +1213,7 @@ PrefabInstance:
       objectReference: {fileID: 342291310}
     - target: {fileID: 8537210612906000248, guid: ffa944637a5c9ed4b9a7bbc9b7ffae2d, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8537210612906000248, guid: ffa944637a5c9ed4b9a7bbc9b7ffae2d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1304,7 +1304,7 @@ Transform:
   - {fileID: 1189102491}
   - {fileID: 487839917}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &719707682
 GameObject:
@@ -1560,7 +1560,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &793771690
 AudioSource:
@@ -1746,12 +1746,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895328139}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 1.6666667, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_Father: {fileID: 1113387902}
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &912326522 stripped
 MonoBehaviour:
@@ -2116,8 +2116,9 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1157490582}
+  - {fileID: 895328142}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &1113387904
 Animator:
@@ -3029,7 +3030,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: f2e3a6f69ba7ec248b9fd73f586cc3eb, type: 3}
     - target: {fileID: 9167030471496255037, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9167030471496255037, guid: 3826cb494ab98bd4fa921a15a76cb717, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3134,7 +3135,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1445796021
 PrefabInstance:
@@ -3150,7 +3151,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5382248808913457334, guid: e45d78addca5894439e397e270bd57d3, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5382248808913457334, guid: e45d78addca5894439e397e270bd57d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8158,7 +8159,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!114 &1555198042 stripped
 MonoBehaviour:
@@ -8894,7 +8895,7 @@ RectTransform:
   - {fileID: 1343372981}
   - {fileID: 1117774912}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8949,7 +8950,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1926053131
 MonoBehaviour:
