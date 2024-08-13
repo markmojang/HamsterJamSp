@@ -20,7 +20,7 @@ public class PauseMenuController : MonoBehaviour
     private Vector2 rightPanelInitialPosition;
     private Vector2 leftPanelOffscreenPosition;
     private Vector2 rightPanelOffscreenPosition;
-    private bool isPaused = true;
+    private bool isPaused = false;
     private float animationProgress = 0f;
     private Coroutine currentAnimation = null;
     private AudioSource audioSource;
@@ -35,9 +35,8 @@ public class PauseMenuController : MonoBehaviour
         rightPanelOffscreenPosition = new Vector2(Screen.width / 3, rightPanel.anchoredPosition.y);
 
         // Move panels off-screen initially
-        // leftPanel.anchoredPosition = leftPanelOffscreenPosition;
-        // rightPanel.anchoredPosition = rightPanelOffscreenPosition;
-        Time.timeScale = 0f;
+        leftPanel.anchoredPosition = leftPanelOffscreenPosition;
+        rightPanel.anchoredPosition = rightPanelOffscreenPosition;
 
         // Get or add an AudioSource component
         audioSource = gameObject.GetComponent<AudioSource>();
