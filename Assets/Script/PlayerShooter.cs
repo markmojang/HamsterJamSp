@@ -9,6 +9,7 @@ public class PlayerShooter : MonoBehaviour
     public float fireRate = 0.5f;
     private float firect = 0f;
     private Camera mainCamera;
+    private int time = 1;
     [SerializeField] private float bulletlifespan;
 
     void Start()
@@ -54,7 +55,28 @@ public class PlayerShooter : MonoBehaviour
 
     IEnumerator vanishbullet(GameObject objects)
     {
-        yield return new WaitForSeconds(bulletlifespan);
-        ObjectPool.Instance.ReturnObjectToPool("PlayerBullets", objects);
+        float elapsedTime = 0f;
+        bool checkes = false;
+        while (elapsedTime <= bulletlifespan)
+        {
+            if (!objects.activeSelf) // Check if the GameObject is inactive
+            {
+                elapsedTime = 0f; // Reset the timer
+                Debug.Log("Reset Timer " + time.ToString());
+                checkes = true;
+                break;
+            }
+            else
+            {
+                elapsedTime += Time.deltaTime;
+            }
+            yield return null;
+        }
+        if(!checkes){
+            Debug.Log("Returned " + time.ToString());
+            ObjectPool.Instance.ReturnObjectToPool("PlayerBullets", objects);
+            time++;
+        }
+        
     }
 }
