@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class WaveManager : MonoBehaviour
 {
+
     public int currentWave = 1;
     public int enemiesPerWave = 4;
     public int checkpointInterval = 5; // Set the checkpoint interval
@@ -11,14 +12,15 @@ public class WaveManager : MonoBehaviour
     private int enemiesAlive = 0;
     private Spawner spawner;
     private PlayerController player;
-    [SerializeField] AudioSource WaveSoundSource;
+    [SerializeField] private AudioSource WaveSoundSource;
     private WaveUI waveUI; // Reference to the WaveUI
     private PlayerShooter playershoot;
+
     private void Start()
     {
-        WaveSoundSource = gameObject.GetComponent<AudioSource>();   
+        WaveSoundSource = gameObject.GetComponent<AudioSource>();
         spawner = GetComponent<Spawner>();
-        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>(); 
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
         playershoot = GameObject.FindWithTag("Player").transform.GetChild(0).gameObject.GetComponent<PlayerShooter>();
         waveUI = FindObjectOfType<WaveUI>(); // Find the WaveUI in the scene
 
@@ -39,7 +41,7 @@ public class WaveManager : MonoBehaviour
             PlayerPrefs.SetInt("SpinPoint", 0);
             PlayerPrefs.Save();
         }
-        
+
         StartCoroutine(StartWave());
     }
 
@@ -49,7 +51,7 @@ public class WaveManager : MonoBehaviour
         if (enemiesAlive <= 0)
         {
             PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint") + 5);
-            WaveSoundSource.Play();
+            PlayWaveSound(); // Call the method to play sound
             StartNextWave();
             Debug.Log("Next Wave");
         }
@@ -79,7 +81,8 @@ public class WaveManager : MonoBehaviour
         currentWave++;
         player.health = player.maxhp;
         player.UpdateHealthBar();
-        if(currentWave > 1){
+        if (currentWave > 1)
+        {
             PlayerPrefs.SetFloat("PFirerate", playershoot.fireRate);
             PlayerPrefs.SetFloat("PVelocity", playershoot.bulletSpeed);
             PlayerPrefs.Save();
@@ -108,10 +111,18 @@ public class WaveManager : MonoBehaviour
         return enemiesAlive;
     }
 
-    // Method to reset the scene and start from the checkpoint
     public void ResetToCheckpoint()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name); // Reload the current scene
         Debug.Log("Restarting from Checkpoint Wave " + checkpointWave);
+    }
+
+    // Method to play sound
+    public void PlayWaveSound()
+    {
+        if (WaveSoundSource != null)
+        {
+            WaveSoundSource.Play();
+        }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.UI; // Include this for Button and UI management
 
 public class PlayerUpgrades : MonoBehaviour
 {
+
     [SerializeField] private PlayerController playerController;
     [SerializeField] private PlayerShooter playerShooter;
     [SerializeField] private TextMeshProUGUI currencyText;
@@ -36,6 +37,7 @@ public class PlayerUpgrades : MonoBehaviour
         bulletSpeedUpgradeCost = PlayerPrefs.GetInt("UpgradeFirerate");
         UpdateCurrencyDisplay();
         UpdateButtonLabels();
+
     }
 
     public void IncreaseMaxHP()

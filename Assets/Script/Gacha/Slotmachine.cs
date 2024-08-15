@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class Slotmachine : MonoBehaviour
 {
-    
     public Image[] slotImages; // Array to hold the images representing the slots
     public Sprite[] slotSprites; // Array to hold the possible sprites for the slots
     [SerializeField] private float spinSpeedfx;
@@ -19,8 +19,14 @@ public class Slotmachine : MonoBehaviour
     [SerializeField] private AudioClip spinClip; // The sound effect that plays during each spin
     [SerializeField] private AudioClip backgroundClip; // The background sound that plays during spinning
 
-    private AudioSource backgroundMusicSource;
-    private AudioSource spinSoundSource;
+    [SerializeField] private float autoSpinDelay = 0.5f; // Delay between spins
+    private bool isAutoSpinning = false;
+    private Coroutine autoSpinCoroutine;
+
+    [SerializeField] private float spinVolume = 1.0f; // Volume for the spin sound effect
+    [SerializeField] private float backgroundVolume = 1.0f; // Volume for the background music
+
+    private AudioSource audioSource;
     private PlayerController player;
     private PlayerShooter playershoot;
     private string previousSymbol = null;
@@ -37,13 +43,14 @@ public class Slotmachine : MonoBehaviour
             initialPosition.Add(slotImages[i].rectTransform.anchoredPosition); // Use Add() to add elements to the list
         }
 
-        // Initialize AudioSources
-        backgroundMusicSource = gameObject.AddComponent<AudioSource>();
-        spinSoundSource = gameObject.AddComponent<AudioSource>();
+        // Initialize AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = spinVolume; // Set volume for spin sound
 
-        // Set up background music source
-        backgroundMusicSource.clip = backgroundClip;
-        backgroundMusicSource.loop = false; // Enable looping
+        // Set up background music
+        audioSource.clip = backgroundClip;
+        audioSource.loop = true; // Enable looping for background music
+        audioSource.volume = backgroundVolume; // Set volume for background music
     }
 
     private void Update()
@@ -51,20 +58,65 @@ public class Slotmachine : MonoBehaviour
         spinvalue.text = "SPIN X" + PlayerPrefs.GetInt("SpinPoint").ToString();
     }
 
+    public void StartAutoSpin()
+    {
+        if (isAutoSpinning)
+        {
+            StopAutoSpin();
+            return;
+        }
+
+        if (!isSpinning && PlayerPrefs.GetInt("SpinPoint") > 0)
+        {
+            isAutoSpinning = true;
+            autoSpinCoroutine = StartCoroutine(AutoSpin());
+        }
+    }
+
+    private IEnumerator AutoSpin()
+    {
+        // Keep spinning until spin points are exhausted or auto spinning is stopped
+        while (PlayerPrefs.GetInt("SpinPoint") > 0 && isAutoSpinning)
+        {
+            StartSpinning(); // Start a single spin
+            yield return new WaitWhile(() => isSpinning); // Wait until the spin is done
+            yield return new WaitForSecondsRealtime(autoSpinDelay); // Use unscaled time for delay
+        }
+
+        isAutoSpinning = false;
+        Debug.Log("Auto spin finished or stopped.");
+    }
+
+    public void StopAutoSpin()
+    {
+        if (isAutoSpinning)
+        {
+            isAutoSpinning = false;
+            if (autoSpinCoroutine != null)
+            {
+                StopCoroutine(autoSpinCoroutine);
+                autoSpinCoroutine = null;
+            }
+            Debug.Log("Auto spin stopped by user.");
+        }
+    }
+
     public void StartSpinning()
     {
         if (!isSpinning && PlayerPrefs.GetInt("SpinPoint") > 0)
         {
-            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint") - 1);
+            isSpinning = true; // Indicate that spinning has started
+            PlayerPrefs.SetInt("SpinPoint", PlayerPrefs.GetInt("SpinPoint") - 1); // Reduce spin points
+
             for (int i = 0; i < slotImages.Length; i++)
             {
                 Color imageColor = slotImages[i].color;
-                imageColor.a = 1f; // Set alpha to 1 for fully opaque
+                imageColor.a = 1f;
                 slotImages[i].color = imageColor;
             }
-            // Play background music
-            backgroundMusicSource.Play();
 
+            audioSource.clip = backgroundClip;
+            audioSource.Play(); // Play background music
             StartCoroutine(SpinSlots());
         }
     }
@@ -72,15 +124,15 @@ public class Slotmachine : MonoBehaviour
     private IEnumerator SpinSlots()
     {
         isSpinning = true;
-        int index = 0;
         float elapsed = 0f;
-        float spriteChangeInterval = 0.1f; // Initial interval for sprite changes
+        int index = 0;
+        float spriteChangeInterval = 0.1f;
         float nextSpriteChangeTime = 0f;
 
         while (elapsed <= spinDuration)
         {
-            elapsed += Time.unscaledDeltaTime;
-            spinSpeed -= Time.unscaledDeltaTime; // Decelerate the spin speed
+            elapsed += Time.unscaledDeltaTime; // Use unscaled time here
+            spinSpeed -= Time.unscaledDeltaTime; // Adjust spin speed with unscaled time
 
             if (elapsed >= spinDuration && index == 2)
             {
@@ -113,25 +165,15 @@ public class Slotmachine : MonoBehaviour
                     string chosenSymbol = ChooseSymbol(i);
                     int randomIndex = GetSpriteIndex(chosenSymbol);
                     slotImages[i].sprite = slotSprites[randomIndex];
-
-                    // Play the spin sound effect each time a sprite changes
-                    if (spinClip)
-                    {
-                        spinSoundSource.PlayOneShot(spinClip);
-                    }
+                    audioSource.PlayOneShot(spinClip); // Play spin sound
                 }
-
-                // Increase the interval for the next sprite change
-                spriteChangeInterval += 0.05f; // Adjust this value to control the deceleration rate
+                spriteChangeInterval += 0.05f;
                 nextSpriteChangeTime = Time.unscaledTime + spriteChangeInterval;
             }
 
             for (int i = 0 + index; i < slotImages.Length; i++)
             {
-                // Move the slot image downward
                 slotImages[i].rectTransform.anchoredPosition -= new Vector2(0, spinSpeed);
-
-                // Loop the position if it goes off-screen
                 if (slotImages[i].rectTransform.anchoredPosition.y < -50)
                 {
                     slotImages[i].rectTransform.anchoredPosition = new Vector2(slotImages[i].rectTransform.anchoredPosition.x, 50);
@@ -143,10 +185,32 @@ public class Slotmachine : MonoBehaviour
 
         isSpinning = false;
         spinSpeed = spinSpeedfx;
+        audioSource.Stop(); // Stop background music
 
-        // Stop the background music when spinning stops
-        backgroundMusicSource.Stop();
         CheckResult();
+    }
+
+    public void SellSlot()
+    {
+        if (PlayerPrefs.GetInt("SpinPoint") > 0)
+        {
+            // Find GameObject with tag "Player" and get the component
+            PlayerUpgrades player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerUpgrades>();
+            if (player != null)
+            {
+                player.AddCurrency(PlayerPrefs.GetInt("SpinPoint"));
+            }
+
+            // Find GameObject with tag "Wave" and get the component
+            WaveManager wave = GameObject.FindGameObjectWithTag("Wave").GetComponent<WaveManager>();
+            if (wave != null)
+            {
+                wave.PlayWaveSound();
+            }
+
+            // Set SpinPoint to 0
+            PlayerPrefs.SetInt("SpinPoint", 0);
+        }
     }
 
     private void CheckResult()
@@ -182,8 +246,8 @@ public class Slotmachine : MonoBehaviour
         playershoot.fireRate /= 2;
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        basestat1 = basestat1 - (basestat1/2 - playershoot.fireRate);
-        basestat2 = basestat2 + (playershoot.bulletSpeed - basestat2*2);
+        basestat1 = basestat1 - (basestat1 / 2 - playershoot.fireRate);
+        basestat2 = basestat2 + (playershoot.bulletSpeed - basestat2 * 2);
         playershoot.fireRate = basestat1;
         playershoot.bulletSpeed = basestat2;
         PlayerPrefs.SetFloat("PFirerate", basestat1);
@@ -195,7 +259,7 @@ public class Slotmachine : MonoBehaviour
         float basestat1 = player.moveSpeed;
         player.moveSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        basestat1  = basestat1 + (player.moveSpeed - basestat1*2);
+        basestat1 = basestat1 + (player.moveSpeed - basestat1 * 2);
         player.moveSpeed = basestat1;
         PlayerPrefs.SetFloat("PMoveSpeed", basestat1);
     }
@@ -205,7 +269,7 @@ public class Slotmachine : MonoBehaviour
         float basestat1 = player.Damage;
         player.Damage *= 2;
         yield return new WaitForSeconds(4f);
-        basestat1 = basestat1 + (player.Damage - basestat1*2);
+        basestat1 = basestat1 + (player.Damage - basestat1 * 2);
         player.Damage = basestat1;
         PlayerPrefs.SetFloat("PDamage", basestat1);
     }
