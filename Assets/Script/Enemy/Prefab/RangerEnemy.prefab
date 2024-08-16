@@ -211,8 +211,8 @@ MonoBehaviour:
   deathSFX: {fileID: 8300000, guid: 8a3bd9d3c9709da4f8c2462c23148619, type: 3}
   hitSFX: {fileID: 8300000, guid: aa02c40339398994c98428ce8e64a7dc, type: 3}
   rotationSpeed: 5
-  minDistance: 3
-  maxDistance: 6
+  surroundingRadius: 20
+  orbitSpeed: 20
   attackRange: 10
   bulletPrefab: {fileID: 901066052834134931, guid: 5404f589d82dbd14cbb240bc2095d545, type: 3}
   firePoint: {fileID: 2942966518394679716}

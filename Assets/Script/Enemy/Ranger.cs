@@ -18,6 +18,14 @@ public class Ranger : Enemy
     private int currentWave;
     private float currentAngle;
 
+    private enum RangerState
+    {
+        Orbiting,
+        SpeedingTowardsPlayer
+    }
+
+    private RangerState currentState = RangerState.Orbiting;
+
     protected override void Start()
     {
         waveManager = FindObjectOfType<WaveManager>();
@@ -25,7 +33,7 @@ public class Ranger : Enemy
         float multiplier = 1f + (currentWave * 0.1f);
         health = 100f * multiplier;
         damage = 30f * multiplier;
-        speed = 10f;
+        speed = 12f;
 
         // Assign a random initial angle for this enemy
         currentAngle = Random.Range(0f, 360f);
@@ -48,47 +56,53 @@ public class Ranger : Enemy
         }
     }
 
-    private Vector3 currentVelocity = Vector3.zero; // Used for SmoothDamp
-
     private void OrbitAroundPlayer()
     {
         float distance = Vector3.Distance(transform.position, player.position);
 
-        if (distance > surroundingRadius)
+        // Determine the state based on the distance to the player
+        currentState = distance > surroundingRadius ? RangerState.SpeedingTowardsPlayer : RangerState.Orbiting;
+
+        Vector3 targetPosition = transform.position;
+
+        switch (currentState)
         {
-            // Move towards the player if too far from the attack range
-            Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
-            transform.position += directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
+            case RangerState.SpeedingTowardsPlayer:
+                // Move directly towards the player
+                Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
+                transform.position += directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
+                break;
+
+            case RangerState.Orbiting:
+                // Update the angle based on the orbit speed
+                currentAngle = (currentAngle + orbitSpeed * Time.deltaTime) % 360f;
+
+                // Convert angle to radians for trigonometric functions
+                float angleRad = currentAngle * Mathf.Deg2Rad;
+
+                // Calculate the target position on the orbit
+                targetPosition = player.position + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
+                break;
         }
 
-        // Update the angle based on the orbit speed
-        currentAngle += orbitSpeed * Time.deltaTime;
-        if (currentAngle >= 360f)
-        {
-            currentAngle -= 360f; // Keep angle within 0-360 range
-        }
-
-        // Convert angle to radians for trigonometric functions
-        float angleRad = currentAngle * Mathf.Deg2Rad;
-
-        // Calculate the target position on the orbit
-        Vector3 offset = new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
-        Vector3 targetPosition = player.position + offset;
-
-        // Check for nearby Rangers at similar positions
-        Collider2D[] nearbyRangers = Physics2D.OverlapCircleAll(targetPosition, 10f);
+        // Check for nearby Rangers at similar positions and adjust the position if necessary
+        Collider2D[] nearbyRangers = Physics2D.OverlapCircleAll(transform.position, 10f);
         foreach (Collider2D rangerCollider in nearbyRangers)
         {
             Ranger otherRanger = rangerCollider.GetComponent<Ranger>();
             if (otherRanger != null && otherRanger != this)
             {
-                // If the other Ranger is too close, adjust the position
-                Vector3 directionAway = (transform.position - otherRanger.transform.position).normalized;
-                targetPosition += directionAway * 10f; // Adjust this value for desired spacing
+                float otherRangerDistance = Vector3.Distance(transform.position, otherRanger.transform.position);
+                if (otherRangerDistance < 10f)
+                {
+                    Vector3 directionAway = (transform.position - otherRanger.transform.position).normalized;
+                    targetPosition += directionAway * (10f - otherRangerDistance);
+                }
             }
         }
 
-        transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref currentVelocity, 0.3f, speed);
+        // Smoothly move the ranger towards the target position
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
 
     private void LookAtPlayer()
