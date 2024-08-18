@@ -32,7 +32,7 @@ public class SetValuePlayerPrefs : MonoBehaviour
             PlayerPrefs.Save();
         }
         if(!PlayerPrefs.HasKey("PBulletCount")){
-            PlayerPrefs.SetInt("PBulletCount", 5);
+            PlayerPrefs.SetInt("PBulletCount", 1);
             PlayerPrefs.Save();
         }
         if(!PlayerPrefs.HasKey("PSpreadAngle")){
