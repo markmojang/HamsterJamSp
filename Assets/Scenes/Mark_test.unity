@@ -2808,6 +2808,8 @@ MonoBehaviour:
   damageText: {fileID: 1138227854}
   speedText: {fileID: 806373590}
   fireRateText: {fileID: 1555198042}
+  agText: {fileID: 0}
+  bcText: {fileID: 0}
 --- !u!50 &1113387900
 Rigidbody2D:
   serializedVersion: 4
