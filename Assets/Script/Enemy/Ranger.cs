@@ -69,7 +69,7 @@ public class Ranger : Enemy
         {
             case RangerState.SpeedingTowardsPlayer:
                 Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
-                transform.position += directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
+                targetPosition = directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
                 break;
 
             case RangerState.Orbiting:
