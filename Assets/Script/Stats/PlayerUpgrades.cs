@@ -123,4 +123,29 @@ public class PlayerUpgrades : MonoBehaviour
         moveSpeedUpgradeButtonText.text = moveSpeedUpgradeCost.ToString();
         bulletSpeedUpgradeButtonText.text = bulletSpeedUpgradeCost.ToString();
     }
+    public void IncreaseBulletCount()
+    {
+        playerShooter.bulletCount += 1;
+        UpdateCurrencyDisplay();
+        UpdateButtonLabels();
+    }
+    public void DecreaseBulletCount()
+    {
+        playerShooter.bulletCount -= 1;
+        UpdateCurrencyDisplay();
+        UpdateButtonLabels();
+    }
+     public void IncreaseAngle()
+    {
+        playerShooter.spreadAngle += 10f;
+        UpdateCurrencyDisplay();
+        UpdateButtonLabels();
+    }
+    public void DecreaseAngle()
+    {
+        playerShooter.spreadAngle -= 10f;
+        UpdateCurrencyDisplay();
+        UpdateButtonLabels();
+    }
+    
 }

@@ -31,6 +31,14 @@ public class SetValuePlayerPrefs : MonoBehaviour
             PlayerPrefs.SetInt("PChips", 0);
             PlayerPrefs.Save();
         }
+        if(!PlayerPrefs.HasKey("PBulletCount")){
+            PlayerPrefs.SetInt("PBulletCount", 1);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("PSpreadAngle")){
+            PlayerPrefs.SetFloat("PSpreadAngle", 30f);
+            PlayerPrefs.Save();
+        }
         if(!PlayerPrefs.HasKey("UpgradeHp")){
             PlayerPrefs.SetInt("UpgradeHp", 10);
             PlayerPrefs.Save();
@@ -45,6 +53,14 @@ public class SetValuePlayerPrefs : MonoBehaviour
         }
         if(!PlayerPrefs.HasKey("UpgradeFirerate")){
             PlayerPrefs.SetInt("UpgradeFirerate", 10);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeBullet")){
+            PlayerPrefs.SetInt("UpgradeBullet", 10);
+            PlayerPrefs.Save();
+        }
+        if(!PlayerPrefs.HasKey("UpgradeAngle")){
+            PlayerPrefs.SetInt("UpgradeAngle", 10);
             PlayerPrefs.Save();
         }
     }

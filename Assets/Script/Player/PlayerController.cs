@@ -26,7 +26,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private TMP_Text hpText;
     [SerializeField] private TMP_Text damageText;
     [SerializeField] private TMP_Text speedText;
-    [SerializeField] private TMP_Text fireRateText; // Add this field
+    [SerializeField] private TMP_Text fireRateText;
+     [SerializeField] private TMP_Text agText;
+    [SerializeField] private TMP_Text bcText; // Add this field
 
     private PlayerShooter playerShooter; // Add this field
 
@@ -135,6 +137,14 @@ public class PlayerController : MonoBehaviour
         if (fireRateText != null && playerShooter != null)
         {
             fireRateText.text = "FIR: " + playerShooter.fireRate.ToString("F2");
+        }
+         if (bcText != null)
+        {
+            bcText.text = "BC: " + playerShooter.bulletCount.ToString("F0");
+        }
+         if (agText != null)
+        {
+            agText.text = "AG: " + playerShooter.spreadAngle.ToString("F0");
         }
         else
         {
