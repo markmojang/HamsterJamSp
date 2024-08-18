@@ -68,19 +68,13 @@ public class Ranger : Enemy
         switch (currentState)
         {
             case RangerState.SpeedingTowardsPlayer:
-                // Move directly towards the player
                 Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
                 transform.position += directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
                 break;
 
             case RangerState.Orbiting:
-                // Update the angle based on the orbit speed
                 currentAngle = (currentAngle + orbitSpeed * Time.deltaTime) % 360f;
-
-                // Convert angle to radians for trigonometric functions
                 float angleRad = currentAngle * Mathf.Deg2Rad;
-
-                // Calculate the target position on the orbit
                 targetPosition = player.position + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
                 break;
         }
