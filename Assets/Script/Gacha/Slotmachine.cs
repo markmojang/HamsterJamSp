@@ -246,6 +246,8 @@ public class Slotmachine : MonoBehaviour
         playershoot.fireRate /= 2;
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
+        basestat1 = basestat1 - (basestat1 / 2 - playershoot.fireRate);
+        basestat2 = basestat2 + (playershoot.bulletSpeed - basestat2 * 2);
         playershoot.fireRate = basestat1;
         playershoot.bulletSpeed = basestat2;
         PlayerPrefs.SetFloat("PFirerate", basestat1);
@@ -257,18 +259,19 @@ public class Slotmachine : MonoBehaviour
         float originalSpeed = player.moveSpeed;  // Store the original speed
         player.moveSpeed *= 2;                   // Double the player's speed
         yield return new WaitForSeconds(4f);     // Wait for 4 seconds
-        player.moveSpeed = originalSpeed;        // Restore the original speed
-        PlayerPrefs.SetFloat("PMoveSpeed", originalSpeed);  // Save the original speed
+        player.moveSpeed = originalSpeed + (player.moveSpeed - originalSpeed * 2);        // Restore the original speed
+        PlayerPrefs.SetFloat("PMoveSpeed", player.moveSpeed);  // Save the original speed
     }
 
+    
 
     private IEnumerator Diamond()
     {
         float originalDamage = player.Damage;
         player.Damage *= 2;
         yield return new WaitForSeconds(4f);
-        player.Damage = originalDamage;
-        PlayerPrefs.SetFloat("PDamage", originalDamage);
+        player.Damage = originalDamage + (player.Damage - originalDamage * 2);
+        PlayerPrefs.SetFloat("PDamage", player.Damage);
     }
 
     private IEnumerator Heart()
