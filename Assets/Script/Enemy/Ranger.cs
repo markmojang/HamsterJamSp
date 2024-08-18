@@ -44,7 +44,7 @@ public class Ranger : Enemy
         base.Start();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         OrbitAroundPlayer();
         LookAtPlayer();

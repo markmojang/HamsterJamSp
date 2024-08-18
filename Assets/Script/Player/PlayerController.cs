@@ -148,7 +148,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Fire rate text or PlayerShooter reference is missing.");
+            //Debug.LogWarning("Fire rate text or PlayerShooter reference is missing.");
         }
     }
 }
