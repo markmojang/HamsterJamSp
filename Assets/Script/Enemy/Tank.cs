@@ -34,8 +34,9 @@ public class Tank : Enemy
         base.Start();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
+        MaintainSpacing();
         MoveTowardsPlayer();
         LookAtPlayer();
 
@@ -83,6 +84,28 @@ public class Tank : Enemy
         else
         {
             isAiming = false; // Not ready to fire
+        }
+    }
+
+    private void MaintainSpacing()
+    {
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        float spacingDistance = 10f; // Desired minimum distance between enemies
+
+        foreach (GameObject enemy in enemies)
+        {
+            if (enemy == this.gameObject) continue;
+
+            float distance = Vector3.Distance(transform.position, enemy.transform.position);
+
+            if (distance < spacingDistance)
+            {
+                // Calculate a direction away from the other enemy
+                Vector3 directionAway = transform.position - enemy.transform.position;
+
+                // Move slightly away to maintain spacing
+                transform.position += directionAway.normalized * (spacingDistance - distance) * Time.deltaTime;
+            }
         }
     }
 

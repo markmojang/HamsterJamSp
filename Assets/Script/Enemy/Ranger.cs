@@ -18,6 +18,8 @@ public class Ranger : Enemy
     private int currentWave;
     private float currentAngle;
 
+    public float transitionCooldownTime = 1f; // Time in seconds before allowing state switch
+    private float transitionCooldownTimer;
     private enum RangerState
     {
         Orbiting,
@@ -28,6 +30,9 @@ public class Ranger : Enemy
 
     protected override void Start()
     {
+        currentState = RangerState.SpeedingTowardsPlayer; // Initial state
+        transitionCooldownTimer = 0f;
+
         waveManager = FindObjectOfType<WaveManager>();
         currentWave = waveManager.currentWave - 1;
         float multiplier = 1f + (currentWave * 0.1f);
@@ -46,7 +51,25 @@ public class Ranger : Enemy
 
     private void FixedUpdate()
     {
-        OrbitAroundPlayer();
+        float distance = Vector3.Distance(transform.position, player.position);
+        // Increment the state timer
+        if (transitionCooldownTimer > 0f)
+        {
+            transitionCooldownTimer -= Time.fixedDeltaTime;
+        }
+
+        // Transition between states based on distance to player and cooldown
+        if (currentState == RangerState.Orbiting && distance > (surroundingRadius + 5f) && transitionCooldownTimer <= 0f)
+        {
+            ChangeState(RangerState.SpeedingTowardsPlayer);
+        }
+        else if (currentState == RangerState.SpeedingTowardsPlayer && distance <= (surroundingRadius + 5f) && transitionCooldownTimer <= 0f)
+        {
+            ChangeState(RangerState.Orbiting);
+        }
+
+        // Execute the current state's behavior
+        ExecuteState();
         LookAtPlayer();
 
         if (Time.time >= nextFireTime)
@@ -56,30 +79,49 @@ public class Ranger : Enemy
         }
     }
 
-    private void OrbitAroundPlayer()
+    private void ChangeState(RangerState newState)
     {
-        float distance = Vector3.Distance(transform.position, player.position);
+        if (currentState != newState)
+        {
+            currentState = newState;
+            transitionCooldownTimer = transitionCooldownTime; // Reset the cooldown timer whenever a state is changed
+        }
+    }
 
-        // Determine the state based on the distance to the player
-        currentState = distance > surroundingRadius ? RangerState.SpeedingTowardsPlayer : RangerState.Orbiting;
-
-        Vector3 targetPosition = transform.position;
-
+    private void ExecuteState()
+    {
         switch (currentState)
         {
             case RangerState.SpeedingTowardsPlayer:
-                Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
-                targetPosition = directionTowardsPlayer * (speed * 2.25f) * Time.deltaTime;
+                SpeedTowardsPlayer();
                 break;
 
             case RangerState.Orbiting:
-                currentAngle = (currentAngle + orbitSpeed * Time.deltaTime) % 360f;
-                float angleRad = currentAngle * Mathf.Deg2Rad;
-                targetPosition = player.position + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
+                OrbitAround();
                 break;
         }
 
-        // Check for nearby Rangers at similar positions and adjust the position if necessary
+        AdjustPositionToAvoidNearbyRangers();
+    }
+
+    private void SpeedTowardsPlayer()
+    {
+        Vector3 directionTowardsPlayer = (player.position - transform.position).normalized;
+        transform.position += directionTowardsPlayer * (speed * 1.5f) * Time.fixedDeltaTime;
+    }
+
+    private void OrbitAround()
+    {
+        currentAngle = (currentAngle + orbitSpeed * Time.fixedDeltaTime) % 360f;
+        float angleRad = currentAngle * Mathf.Deg2Rad;
+        Vector3 targetPosition = player.position + new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad), 0) * surroundingRadius;
+
+        // Smoothly move the ranger towards the target position
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime);
+    }
+
+    private void AdjustPositionToAvoidNearbyRangers()
+    {
         Collider2D[] nearbyRangers = Physics2D.OverlapCircleAll(transform.position, 10f);
         foreach (Collider2D rangerCollider in nearbyRangers)
         {
@@ -90,13 +132,10 @@ public class Ranger : Enemy
                 if (otherRangerDistance < 10f)
                 {
                     Vector3 directionAway = (transform.position - otherRanger.transform.position).normalized;
-                    targetPosition += directionAway * (10f - otherRangerDistance);
+                    transform.position += directionAway * (10f - otherRangerDistance);
                 }
             }
         }
-
-        // Smoothly move the ranger towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
     }
 
     private void LookAtPlayer()
