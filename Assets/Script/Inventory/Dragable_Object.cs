@@ -23,5 +23,6 @@ public class Dragable_Object : MonoBehaviour, IBeginDragHandler, IDragHandler, I
     {
         image.raycastTarget = true;
         transform.SetParent(parentAfterDrag);
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 }
