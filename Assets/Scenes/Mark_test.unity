@@ -644,6 +644,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1888559381162717269, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -939,6 +951,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6384492178146074087, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_Camera
       value: 
@@ -950,6 +966,18 @@ PrefabInstance:
     - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_SortingOrder
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_PlaneDistance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_TargetDisplay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649071214814924663, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
+      propertyPath: m_UpdateRectTransformForStandalone
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6747568459721714810, guid: 86f6db7e2dabed8489b94ae786157521, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -10093,6 +10121,7 @@ MonoBehaviour:
   currentWave: 1
   enemiesPerWave: 4
   checkpointInterval: 5
+  enemyCap: 10
   WaveSoundSource: {fileID: 1926053133}
 --- !u!114 &1926053132
 MonoBehaviour:
