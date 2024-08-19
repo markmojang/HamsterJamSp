@@ -8,8 +8,10 @@ public class WaveManager : MonoBehaviour
     public int currentWave = 1;
     public int enemiesPerWave = 4;
     public int checkpointInterval = 5; // Set the checkpoint interval
+    [SerializeField] private int enemyCap = 10;
     private int checkpointWave = 1;
     private int enemiesAlive = 0;
+    private int currentenemy = 0;
     private Spawner spawner;
     private PlayerController player;
     [SerializeField] private AudioSource WaveSoundSource;
@@ -62,7 +64,12 @@ public class WaveManager : MonoBehaviour
         enemiesAlive = enemiesPerWave + currentWave;
         for (int i = 0; i < enemiesPerWave + currentWave; i++)
         {
+            while (currentenemy >= enemyCap)
+            {
+                yield return null; // Wait for the next frame
+            }
             spawner.SpawnEnemy();
+            currentenemy++;
             yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
         }
 
@@ -99,6 +106,7 @@ public class WaveManager : MonoBehaviour
     public void EnemyKilled()
     {
         enemiesAlive--;
+        currentenemy--;
     }
 
     public int GetCurrentWave()
