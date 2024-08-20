@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerShooter : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;  // Serialized for inspector assignment
+    [SerializeField] private GameObject Player;
     public float spreadAngle = 30f; 
     public int bulletCount = 5;
     public float bulletSpeed = 10f;
@@ -54,6 +55,7 @@ public class PlayerShooter : MonoBehaviour
 
 void Shoot(int bulletct,float angle)
 {
+    Vector3 playerpos = Player.transform.position;
     if (bulletct == 1)
     {
         // Get the mouse position and convert it to world space
@@ -61,7 +63,7 @@ void Shoot(int bulletct,float angle)
         mousePosition.z = 0f;
 
         // Calculate the direction from the player to the mouse position
-        Vector3 direction = (mousePosition - transform.position).normalized;
+        Vector3 direction = (mousePosition - playerpos).normalized;
 
         // Get a bullet from the pool
         GameObject bullet = ObjectPool.Instance.GetObjectFromPool("PlayerBullets");
@@ -87,7 +89,7 @@ void Shoot(int bulletct,float angle)
     mousePosition.z = 0f;
 
     // Calculate the base direction from the player to the mouse position
-    Vector3 baseDirection = (mousePosition - transform.position).normalized;
+    Vector3 baseDirection = (mousePosition - playerpos).normalized;
     // Calculate spread parameters
     float angleStep = angle / (bulletct);
     float startAngle = -angle / 2;
