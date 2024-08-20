@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerBullet : MonoBehaviour
 {
-    private float damage;
+    private PlayerController player;
     public GameObject hitEffect;
 
     void Start()
     {
-        damage = GameObject.FindWithTag("Player").GetComponent<PlayerController>().Damage;
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -18,7 +18,7 @@ public class PlayerBullet : MonoBehaviour
         if (enemy != null)
         {
             // Deal damage to the enemy
-            enemy.TakeDamage(damage);
+            enemy.TakeDamage(player.Damage);
 
             // Instantiate the hit effect at the collision point
             if (hitEffect != null)

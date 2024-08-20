@@ -241,26 +241,18 @@ public class Slotmachine : MonoBehaviour
 
     private IEnumerator Clover()
     {
-        float basestat1 = playershoot.fireRate;
-        float basestat2 = playershoot.bulletSpeed;
         playershoot.fireRate /= 2;
         playershoot.bulletSpeed *= 2;
         yield return new WaitForSeconds(4f);
-        basestat1 = basestat1 - (basestat1 / 2 - playershoot.fireRate);
-        basestat2 = basestat2 + (playershoot.bulletSpeed - basestat2 * 2);
-        playershoot.fireRate = basestat1;
-        playershoot.bulletSpeed = basestat2;
-        PlayerPrefs.SetFloat("PFirerate", basestat1);
-        PlayerPrefs.SetFloat("PVelocity", basestat2);
+        playershoot.fireRate = PlayerPrefs.GetFloat("PFirerate");
+        playershoot.bulletSpeed = PlayerPrefs.GetFloat("PVelocity");
     }
 
     private IEnumerator Spade()
     {
-        float originalSpeed = player.moveSpeed;  // Store the original speed
         player.moveSpeed *= 2;                   // Double the player's speed
         yield return new WaitForSeconds(4f);     // Wait for 4 seconds
-        player.moveSpeed = originalSpeed + (player.moveSpeed - originalSpeed * 2);        // Restore the original speed
-        PlayerPrefs.SetFloat("PMoveSpeed", player.moveSpeed);  // Save the original speed
+        player.moveSpeed = PlayerPrefs.GetFloat("PMoveSpeed");        // Restore the original speed
     }
 
     
@@ -270,8 +262,7 @@ public class Slotmachine : MonoBehaviour
         float originalDamage = player.Damage;
         player.Damage *= 2;
         yield return new WaitForSeconds(4f);
-        player.Damage = originalDamage + (player.Damage - originalDamage * 2);
-        PlayerPrefs.SetFloat("PDamage", player.Damage);
+        player.Damage = PlayerPrefs.GetFloat("PDamage");
     }
 
     private IEnumerator Heart()

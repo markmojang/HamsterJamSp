@@ -62,7 +62,8 @@ public class WaveManager : MonoBehaviour
     private IEnumerator StartWave()
     {
         enemiesAlive = enemiesPerWave + currentWave;
-        for (int i = 0; i < enemiesPerWave + currentWave; i++)
+        int enemiesSpawned = 0;
+        while (enemiesSpawned < enemiesPerWave + currentWave)
         {
             while (currentenemy >= enemyCap)
             {
@@ -70,6 +71,7 @@ public class WaveManager : MonoBehaviour
             }
             spawner.SpawnEnemy();
             currentenemy++;
+            enemiesSpawned++;
             yield return new WaitForSeconds(0.7f); // Delay between each enemy spawn
         }
 

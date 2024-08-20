@@ -8,6 +8,7 @@ public abstract class Enemy : MonoBehaviour
     protected Transform player;
     public AudioClip deathSFX; // Assign this through the Inspector
     public AudioClip hitSFX;
+    private bool death = false;
 
     protected virtual void Start()
     {
@@ -17,11 +18,14 @@ public abstract class Enemy : MonoBehaviour
 
     public void TakeDamage(float amount)
     {
-        SoundManager.PlaySound(hitSFX);
-        health -= amount;
-        if (health <= 0)
-        {
-            Die();
+        if(!death){
+            SoundManager.PlaySound(hitSFX);
+            health -= amount;
+            if (health <= 0)
+            {
+                Die();
+                death = true;
+            }
         }
     }
 

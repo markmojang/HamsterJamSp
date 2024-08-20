@@ -48,7 +48,7 @@ public class PlayerUpgrades : MonoBehaviour
             playerController.health = playerController.maxhp; // Restore health to new max
             currency -= maxHPUpgradeCost;
             PlayerPrefs.SetInt("PChips", currency);
-            PlayerPrefs.SetFloat("PmaxHp", playerController.maxhp);
+            PlayerPrefs.SetFloat("PmaxHp", PlayerPrefs.GetFloat("PmaxHp") + 25);
             maxHPUpgradeCost += costIncrement; // Increase cost for this specific upgrade
             PlayerPrefs.SetInt("UpgradeHp", maxHPUpgradeCost);
             UpdateCurrencyDisplay();
@@ -63,7 +63,7 @@ public class PlayerUpgrades : MonoBehaviour
             playerController.Damage += 20;
             currency -= damageUpgradeCost;
             PlayerPrefs.SetInt("PChips", currency);
-            PlayerPrefs.SetFloat("PDamage", playerController.Damage);
+            PlayerPrefs.SetFloat("PDamage", PlayerPrefs.GetFloat("PDamage") + 20);
             damageUpgradeCost += costIncrement; // Increase cost for this specific upgrade
             PlayerPrefs.SetInt("UpgradeDmg", damageUpgradeCost);
             UpdateCurrencyDisplay();
@@ -78,7 +78,7 @@ public class PlayerUpgrades : MonoBehaviour
             playerController.moveSpeed += 1;
             currency -= moveSpeedUpgradeCost;
             PlayerPrefs.SetInt("PChips", currency);
-            PlayerPrefs.SetFloat("PMoveSpeed", playerController.moveSpeed);
+            PlayerPrefs.SetFloat("PMoveSpeed", PlayerPrefs.GetFloat("PMoveSpeed") + 1);
             moveSpeedUpgradeCost += costIncrement; // Increase cost for this specific upgrade
             PlayerPrefs.SetInt("UpgradeSpeed", moveSpeedUpgradeCost);
             UpdateCurrencyDisplay();
@@ -93,8 +93,8 @@ public class PlayerUpgrades : MonoBehaviour
             playerShooter.bulletSpeed += 2;
             playerShooter.fireRate = Mathf.Max(0.1f, playerShooter.fireRate - 0.05f); // Ensure fireRate doesn't go below 0.1
             currency -= bulletSpeedUpgradeCost;
-            PlayerPrefs.SetFloat("PFirerate", playerShooter.fireRate);
-            PlayerPrefs.SetFloat("PVelocity", playerShooter.bulletSpeed);
+            PlayerPrefs.SetFloat("PFirerate",  Mathf.Max(0.1f, PlayerPrefs.GetFloat("PFirerate") - 0.05f) );
+            PlayerPrefs.SetFloat("PVelocity", PlayerPrefs.GetFloat("PVelocity") + 2);
             PlayerPrefs.SetInt("PChips", currency);
             bulletSpeedUpgradeCost += costIncrement; // Increase cost for this specific upgrade
             PlayerPrefs.SetInt("UpgradeFirerate", bulletSpeedUpgradeCost);
