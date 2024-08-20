@@ -23,11 +23,26 @@ public class CameraController : MonoBehaviour
     }
 
     void Start()
+{
+    z = transform.position.z;
+    cam = GetComponent<Camera>();
+
+    // Initialize target zoom to the camera's current zoom level (field of view or orthographic size)
+    targetZoom = cam.orthographic ? cam.orthographicSize : cam.fieldOfView;
+
+    // Clamp the target zoom to a minimum of 15
+    targetZoom = Mathf.Max(targetZoom, 15f);
+
+    // Apply the clamped target zoom to the camera
+    if (cam.orthographic == false)
     {
-        z = transform.position.z;
-        cam = GetComponent<Camera>();
-        targetZoom = cam.orthographic ? cam.orthographicSize : cam.fieldOfView; // Initialize target zoom
+        cam.fieldOfView = targetZoom;
     }
+    else
+    {
+        cam.orthographicSize = targetZoom;
+    }
+}
 
     void FixedUpdate()
     {
