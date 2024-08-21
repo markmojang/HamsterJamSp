@@ -215,9 +215,11 @@ MonoBehaviour:
   orbitSpeed: 20
   attackRange: 10
   bulletPrefab: {fileID: 901066052834134931, guid: 5404f589d82dbd14cbb240bc2095d545, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 9d349710538127a4bb29588a4afe373a, type: 3}
   firePoint: {fileID: 2942966518394679716}
   bulletSpeed: 20
   fireRate: 0.5
+  transitionCooldownTime: 1
 --- !u!95 &1387013521265486463
 Animator:
   serializedVersion: 5

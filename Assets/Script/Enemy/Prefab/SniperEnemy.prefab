@@ -168,6 +168,7 @@ MonoBehaviour:
   rotationSpeed: 5
   attackRange: 10
   bulletPrefab: {fileID: 901066052834134931, guid: 5404f589d82dbd14cbb240bc2095d545, type: 3}
+  bulletSprite: {fileID: 21300000, guid: a7207bf6b8c1fe540923ba0c160cccdd, type: 3}
   firePoint: {fileID: 6075220420812841015}
   bulletSpeed: 30
   fireRate: 1

@@ -138,6 +138,7 @@ MonoBehaviour:
   minDistance: 1
   attackRange: 2
   bulletPrefab: {fileID: 901066052834134931, guid: 5404f589d82dbd14cbb240bc2095d545, type: 3}
+  bulletSprite: {fileID: 21300000, guid: 572bc252cf3e2f44dab0a3e088ec55f7, type: 3}
   firePoint: {fileID: 3102844065380545412}
   bulletSpeed: 15
   fireRate: 2

@@ -9391,7 +9391,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 10.096804
+  orthographic size: 19.285715
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -10122,7 +10122,7 @@ MonoBehaviour:
   currentWave: 1
   enemiesPerWave: 4
   checkpointInterval: 5
-  enemyCap: 10
+  enemyCap: 25
   WaveSoundSource: {fileID: 1926053133}
 --- !u!114 &1926053132
 MonoBehaviour:
