@@ -2846,6 +2846,7 @@ GameObject:
   - component: {fileID: 1113387906}
   - component: {fileID: 1113387907}
   - component: {fileID: 1113387908}
+  - component: {fileID: 1113387909}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2869,10 +2870,14 @@ MonoBehaviour:
   health: 100
   Damage: 100
   moveSpeed: 13
+  dashSpeed: 35
+  dashDuration: 1
   healthBar: {fileID: 719707684}
   iFrameDuration: 1.5
   blinkInterval: 0.2
   HitSoundSource: {fileID: 1113387907}
+  ghostController: {fileID: 0}
+  spriteRenderer: {fileID: 0}
   hpText: {fileID: 608366231}
   damageText: {fileID: 1138227854}
   speedText: {fileID: 806373590}
@@ -3176,6 +3181,23 @@ MonoBehaviour:
   moveSpeedUpgradeButtonText: {fileID: 912326524}
   bulletSpeedUpgradeButton: {fileID: 912326523}
   bulletSpeedUpgradeButtonText: {fileID: 912326522}
+--- !u!114 &1113387909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113387898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e11f84f031475e841826efff550b0e78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ghostPrefab: {fileID: 2344744869959826910, guid: 1836d6eace711054cab51429ca946089, type: 3}
+  delay: 0.05
+  destroyTime: 0.25
+  color: {r: 1, g: 0.95106304, b: 0, a: 1}
+  material: {fileID: 0}
 --- !u!1 &1117774911
 GameObject:
   m_ObjectHideFlags: 0
